@@ -465,10 +465,18 @@ const httpServer = http.createServer((req, res) => {
     };
 
     switch (reqPath) {
-      case '/':
-      case '/health':
-        jsonResponse({
-          status: 'ok', name: '2026世界杯实时数据服务', version: '2.0.0',
+      case '/': {
+        // 浏览器访问 → 返回 HTML 页面；API 工具请求 → 返回 JSON
+        const accept = (req.headers['accept'] || '').toLowerCase();
+        if (accept.includes('text/html') || accept.includes('*/*')) {
+          const indexFile = path.join(STATIC_DIR, 'index.html');
+          return fs.readFile(indexFile, (err, data) => {
+            if (err) { jsonResponse({ error: 'Not Found' }, 404); return; }
+            res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+            res.end(data);
+          });
+        }
+        jsonResponse({ status: 'ok', name: '2026世界杯实时数据服务', version: '2.0.0',
           uptime: process.uptime(), clients: clients.size,
           matches: store.matchCount, stage: store.stage,
           lastUpdate: store.lastUpdate, dataSource: 'football-data.org',
@@ -478,6 +486,8 @@ const httpServer = http.createServer((req, res) => {
                         store.stage.startsWith('knockout') ? '淘汰赛' : '决赛阶段'
         });
         break;
+      }
+      case '/health':
       case '/api/matches':
         jsonResponse({ matches: store.matches, count: store.matches.length });
         break;
