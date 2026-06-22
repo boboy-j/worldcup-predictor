@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#1b5e20">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="世界杯2026">
+<link rel="manifest" href="./manifest.json">
+<title>2026世界杯 · 实时赛况</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+/* ========== 主题变量 ========== */
+:root {
+  --pitch-green: #1b5e20;
+  --pitch-mid: #2e7d32;
+  --pitch-light: #4caf50;
+  --gold: #c8a415;
+  --gold-light: #f9e076;
+  --gold-bg: #fff8dc;
+
+  --bg0: #f0f4f0;
+  --bg1: #ffffff;
+  --bg2: #f5f8f5;
+  --bg3: #e8f0e8;
+  --surface: #ffffff;
+  --surface-hover: #eef4ee;
+
+  --text0: #0a1a0a;
+  --text1: #1b3a1b;
+  --text2: #2e5a2e;
+  --text-muted: #5a7a5a;
+
+  --border-1: #d0e0d0;
+  --border-2: #b8d0b8;
+
+  --accent-1: #1b5e20;
+  --accent-2: #c8a415;
+  --accent-3: #e65100;
+
+  --green-soft: #e8f5e9;
+  --green-fg: #1b5e20;
+  --red-soft: #ffebee;
+  --red-fg: #b71c1c;
+  --gold-soft: #fff8e1;
+  --gold-fg: #8d6e00;
+  --blue-soft: #e3f2fd;
+  --blue-fg: #0d47a1;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.10);
+
+  font-family: 'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+}
+[data-theme="dark"] {
+  --bg0: #0a1a0a;
+  --bg1: #102010;
+  --bg2: #152815;
+  --bg3: #1a301a;
+  --surface: rgba(20,40,20,0.90);
+  --surface-hover: rgba(30,55,30,0.70);
+
+  --text0: #e8f0e8;
+  --text1: #d0e0d0;
+  --text2: #b0c8b0;
+  --text-muted: #7a9a7a;
+
+  --border-1: #2a4a2a;
+  --border-2: #3a5a3a;
+
+  --accent-1: #4caf50;
+  --accent-2: #f9e076;
+  --accent-3: #ff8a50;
+
+  --green-soft: rgba(76,175,80,0.15);
+  --green-fg: #69f0ae;
+  --red-soft: rgba(244,67,54,0.15);
+  --red-fg: #ef9a9a;
+  --gold-soft: rgba(249,224,118,0.15);
+  --gold-fg: #f9e076;
+  --blue-soft: rgba(66,165,245,0.15);
+  --blue-fg: #90caf9;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+/* ========== 全局 ========== */
+* { scrollbar-width:thin; scrollbar-color:var(--accent-2) var(--bg2); }
+body {
+  background: var(--bg0);
+  color: var(--text1);
+  min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ========== 卡片 ========== */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border-1);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s;
+}
+.card:hover { box-shadow: var(--shadow-md); }
+.card-sub {
+  background: var(--bg2);
+  border-radius: 10px;
+}
+
+/* ========== 头部 & 导航 ========== */
+.header-bar {
+  background: linear-gradient(135deg, var(--pitch-green) 0%, #0f3f12 100%);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.header-bar h1 { color:#fff; }
+.header-bar p.sub { color:rgba(255,255,255,0.75); }
+.nav-scroll {
+  position: sticky;
+  top: 56px;
+  z-index: 40;
+  background: var(--bg0);
+  border-bottom: 1px solid var(--border-1);
+}
+.nav-btn {
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--text2);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.nav-btn:hover { background: var(--surface-hover); color: var(--text0); }
+.nav-btn.active {
+  background: var(--pitch-green);
+  color: #fff;
+  border-color: var(--pitch-green);
+  box-shadow: 0 2px 6px rgba(27,94,32,0.3);
+}
+[data-theme="dark"] .nav-btn.active {
+  background: var(--accent-1);
+  box-shadow: 0 2px 6px rgba(76,175,80,0.3);
+}
+
+/* ========== 标签 & 徽章 ========== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+.badge-green { background:var(--green-soft); color:var(--green-fg); }
+.badge-red { background:var(--red-soft); color:var(--red-fg); }
+.badge-gold { background:var(--gold-soft); color:var(--gold-fg); }
+.badge-blue { background:var(--blue-soft); color:var(--blue-fg); }
+.badge-gray { background:var(--bg3); color:var(--text-muted); }
+
+.ws-dot { width:8px;height:8px;border-radius:50%;display:inline-block; }
+.ws-connecting { background:#fdd835;animation:pulse-dot 1s infinite; }
+.ws-connected { background:#4caf50; }
+.ws-disconnected { background:#e53935; }
+@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+/* ========== 切换按钮 ========== */
+.theme-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+.theme-btn:hover { background: rgba(255,255,255,0.3); }
+
+/* ========== 统计卡片 ========== */
+.stat-card {
+  text-align: center;
+  padding: 16px 8px;
+}
+.stat-card .num {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text0);
+  line-height: 1.1;
+}
+.stat-card .lbl {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* ========== 比分盘 ========== */
+.scoreboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.score-team {
+  text-align: center;
+  min-width: 60px;
+}
+.score-team .flag { font-size: 1.75rem; }
+.score-team .name { font-size: 0.75rem; font-weight: 600; color: var(--text1); }
+.score-digits {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text0);
+  min-width: 36px;
+  text-align: center;
+}
+.score-colon { color: var(--text-muted); font-weight: 300; }
+.minute-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 12px;
+  background: var(--red-soft);
+  color: var(--red-fg);
+}
+
+/* ========== 小组赛表格 ========== */
+.group-table { width:100%; border-collapse:collapse; font-size:0.72rem; }
+.group-table th {
+  text-align:center;
+  padding:6px 3px;
+  font-weight:600;
+  color:var(--text-muted);
+  border-bottom:2px solid var(--border-1);
+}
+.group-table td {
+  text-align:center;
+  padding:6px 3px;
+  border-bottom:1px solid var(--border-1);
+}
+.group-table td.left { text-align:left; }
+.group-table tr.qualified { background:var(--green-soft); }
+.group-table tr.third-place { background:var(--gold-soft); }
+.group-table tr.eliminated { background:transparent; }
+
+/* ========== 进度条 ========== */
+.progress-bar {
+  height: 4px;
+  border-radius: 4px;
+  background: var(--bg3);
+  overflow: hidden;
+  margin-top: 4px;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+/* ========== 淘汰赛括号 ========== */
+.knockout-wrap { overflow-x:auto; padding-bottom:8px; }
+.knockout-bracket {
+  display: flex;
+  gap: 20px;
+  min-width: max-content;
+}
+.bracket-round {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 140px;
+}
+.bracket-round-title {
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent-2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 0;
+  border-bottom: 2px solid var(--accent-2);
+  margin-bottom: 6px;
+}
+.bracket-match {
+  background: var(--surface);
+  border: 1px solid var(--border-1);
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+.bracket-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 0;
+}
+.bracket-team {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text1);
+  flex:1;
+}
+.bracket-score {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text0);
+  min-width: 20px;
+  text-align:center;
+}
+
+/* ========== 选择器 ========== */
+.wc-select {
+  width:100%;
+  padding:10px 12px;
+  border-radius:10px;
+  font-size:0.85rem;
+  font-weight:600;
+  background:var(--bg2);
+  color:var(--text1);
+  border:1px solid var(--border-1);
+  outline:none;
+  transition:border-color 0.2s;
+  appearance:auto;
+}
+.wc-select:focus { border-color:var(--accent-2); }
+
+/* ========== 按钮 ========== */
+.btn-primary {
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  padding:10px 20px;
+  border-radius:10px;
+  font-size:0.82rem;
+  font-weight:700;
+  background:var(--pitch-green);
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.btn-primary:hover { background:#0f4613; transform:translateY(-1px); box-shadow:0 4px 12px rgba(27,94,32,0.3); }
+[data-theme="dark"] .btn-primary { background:var(--accent-1); color:#000; }
+[data-theme="dark"] .btn-primary:hover { background:#66bb6a; }
+
+.btn-secondary {
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  padding:10px 20px;
+  border-radius:10px;
+  font-size:0.82rem;
+  font-weight:600;
+  background:var(--bg3);
+  color:var(--text1);
+  border:1px solid var(--border-1);
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.btn-secondary:hover { background:var(--surface-hover); }
+
+.btn-sm { padding:6px 14px; font-size:0.75rem; }
+
+/* ========== 空状态 ========== */
+.empty-state {
+  text-align:center;
+  padding:24px 16px;
+  color:var(--text-muted);
+}
+.empty-state i { font-size:2rem; margin-bottom:8px; opacity:0.5; }
+.empty-state p { font-size:0.85rem; }
+
+/* ========== 切换动画 ========== */
+.fade-in { animation:fadeIn 0.2s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
+
+/* ========== 通知 ========== */
+#goal-notifications {
+  position:fixed;
+  top:70px;
+  right:12px;
+  z-index:999;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  max-width:320px;
+}
+.goal-notification {
+  background:var(--surface);
+  border:2px solid var(--accent-2);
+  border-radius:12px;
+  padding:12px 16px;
+  box-shadow:var(--shadow-lg);
+  animation:slideIn 0.3s ease;
+  position:relative;
+}
+@keyframes slideIn { from{transform:translateX(100%);opacity:0} to{transform:translateX(0);opacity:1} }
+
+/* ========== 事件流 ========== */
+.event-item {
+  padding:8px 12px;
+  border-radius:8px;
+  margin-bottom:6px;
+  font-size:0.75rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:var(--bg2);
+  border-left:3px solid var(--accent-2);
+}
+.event-time { font-size:0.65rem; color:var(--text-muted); font-family:monospace; }
+
+/* ========== 底部 ========== */
+.footer {
+  margin-top:40px;
+  padding:20px 16px;
+  text-align:center;
+  font-size:0.7rem;
+  color:var(--text-muted);
+  border-top:1px solid var(--border-1);
+}
+
+/* ========== 响应式 ========== */
+@media (max-width:480px) {
+  .score-team .flag { font-size:1.4rem; }
+  .score-digits { font-size:1.2rem; min-width:28px; }
+  .stat-card .num { font-size:1.4rem; }
+}
+
+/* ========== Chart.js 微调 ========== */
+.wc-chart { border-radius:10px; padding:8px; background:var(--bg2); }
+</style>
+</head>
+<body>
+
+<div id="goal-notifications"></div>
+
+<!-- ===== 顶栏 ===== -->
+<header class="header-bar sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-3 py-2 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <div class="text-2xl">🏆</div>
+      <div>
+        <h1 class="text-base font-bold leading-tight">2026 世界杯</h1>
+        <p class="sub text-xs">美加墨 · 实时赛况</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <span id="ws-badge" class="badge badge-gray"><span class="ws-dot ws-connecting"></span><span id="ws-text">连接中</span></span>
+      <button class="theme-btn" onclick="toggleTheme()" title="切换主题">
+        <i class="fas fa-moon" id="theme-icon"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== 导航 ===== -->
+<nav class="nav-scroll">
+  <div class="max-w-7xl mx-auto px-3 py-2">
+    <div class="flex gap-1.5 overflow-x-auto pb-1" style="scrollbar-width:none">
+      <button class="nav-btn active" onclick="switchTab('dashboard')">📊 总览</button>
+      <button class="nav-btn" onclick="switchTab('live')">🔴 直播</button>
+      <button class="nav-btn" onclick="switchTab('groups')">📋 小组</button>
+      <button class="nav-btn" onclick="switchTab('knockout')">🏆 淘汰赛</button>
+      <button class="nav-btn" onclick="switchTab('champion')">📈 冠军预测</button>
+      <button class="nav-btn" onclick="switchTab('match')">⚽ 胜负分析</button>
+      <button class="nav-btn" onclick="switchTab('score')">📊 比分预测</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== 主体 ===== -->
+<main class="max-w-7xl mx-auto px-3 pb-24">
+
+<!-- tab: 总览 -->
+<div id="tab-dashboard" class="fade-in">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+    <div class="card stat-card">
+      <div class="num" id="kpi-total">-</div>
+      <div class="lbl">总场次</div>
+    </div>
+    <div class="card stat-card">
+      <div class="num" id="kpi-finished">-</div>
+      <div class="lbl">已结束</div>
+    </div>
+    <div class="card stat-card">
+      <div class="num" id="kpi-live">-</div>
+      <div class="lbl">进行中</div>
+    </div>
+    <div class="card stat-card">
+      <div class="num" id="kpi-upcoming">-</div>
+      <div class="lbl">未开始</div>
+    </div>
+  </div>
+
+  <div class="card p-4 mb-4">
+    <h2 class="text-sm font-bold mb-3 flex items-center gap-2"><i class="fas fa-fire" style="color:var(--accent-3)"></i>射手榜 TOP5</h2>
+    <div id="top-scorers"><div class="empty-state"><p>加载中...</p></div></div>
+  </div>
+
+  <div class="card p-4 mb-4">
+    <h2 class="text-sm font-bold mb-3 flex items-center gap-2"><i class="fas fa-clock" style="color:var(--blue-fg)"></i>最近赛果</h2>
+    <div id="recent-matches"><div class="empty-state"><p>加载中...</p></div></div>
+  </div>
+
+  <div class="card p-4">
+    <h2 class="text-sm font-bold mb-3 flex items-center gap-2"><i class="fas fa-circle-info" style="color:var(--text-muted)"></i>连接状态</h2>
+    <div class="text-xs space-y-2" id="server-status">
+      <div class="flex justify-between py-1"><span style="color:var(--text-muted)">WebSocket</span><span id="srv-conn" class="font-semibold">检测中</span></div>
+      <div class="flex justify-between py-1"><span style="color:var(--text-muted)">比赛数</span><span id="srv-matches" class="font-semibold">-</span></div>
+      <div class="flex justify-between py-1"><span style="color:var(--text-muted)">更新时间</span><span id="srv-time" class="font-semibold">-</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- tab: 直播 -->
+<div id="tab-live" class="hidden fade-in">
+  <div class="card p-4 mb-4">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-sm font-bold flex items-center gap-2"><i class="fas fa-broadcast-tower" style="color:var(--red-fg)"></i>实时比赛</h2>
+      <span class="badge badge-red" id="live-count-badge">0</span>
+    </div>
+    <div id="live-matches-container"><div class="empty-state"><i class="fas fa-satellite-dish"></i><p>连接服务器获取实时数据...</p></div></div>
+  </div>
+  <div class="card p-4">
+    <h2 class="text-sm font-bold mb-3 flex items-center gap-2"><i class="fas fa-list" style="color:var(--blue-fg)"></i>实时事件</h2>
+    <div id="event-stream" style="max-height:350px;overflow-y:auto"><div class="empty-state py-4"><p>等待数据...</p></div></div>
+  </div>
+</div>
+
+<!-- tab: 小组 -->
+<div id="tab-groups" class="hidden fade-in">
+  <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+    <h2 class="text-sm font-bold">📋 小组积分榜</h2>
+    <div class="flex gap-1 text-xs">
+      <span class="badge badge-green">晋级</span>
+      <span class="badge badge-gold">可能晋级</span>
+      <span class="badge badge-gray">出局</span>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" id="groups-container"></div>
+</div>
+
+<!-- tab: 淘汰赛 -->
+<div id="tab-knockout" class="hidden fade-in">
+  <div class="card p-4">
+    <h2 class="text-sm font-bold mb-4">🏆 淘汰赛对阵</h2>
+    <div class="knockout-wrap">
+      <div class="knockout-bracket" id="knockout-bracket"></div>
+    </div>
+  </div>
+</div>
+
+<!-- tab: 冠军预测 -->
+<div id="tab-champion" class="hidden fade-in">
+  <div class="card p-4 mb-4">
+    <h2 class="text-sm font-bold mb-1">📈 冠军预测</h2>
+    <p class="mb-4 text-xs" style="color:var(--text-muted)">ELO评分 + 蒙特卡洛模拟 (10,000次)</p>
+    <div class="flex gap-2 mb-4">
+      <button onclick="runChampionSim()" class="btn-primary btn-sm"><i class="fas fa-play mr-1"></i>运行模拟</button>
+      <button onclick="resetChampion()" class="btn-secondary btn-sm"><i class="fas fa-redo mr-1"></i>重置</button>
+    </div>
+    <div id="champion-results" class="hidden">
+      <div class="mb-4 wc-chart"><canvas id="champion-chart" height="200"></canvas></div>
+      <div class="space-y-2" id="champion-list"></div>
+    </div>
+    <div id="champion-empty" class="empty-state">
+      <i class="fas fa-dice"></i><p>点击「运行模拟」开始预测</p><p class="text-xs mt-1" style="color:var(--text-muted)">10,000次蒙特卡洛模拟</p>
+    </div>
+  </div>
+  <div class="card p-4 hidden" id="likely-final">
+    <h3 class="text-sm font-bold mb-3">🎯 最可能决赛对阵</h3>
+    <div class="flex items-center justify-center gap-4 py-4">
+      <div class="text-center flex-1">
+        <div class="score-team"><div class="flag" id="final-team1-flag">🇦🇷</div></div>
+        <div class="name font-bold text-sm" id="final-team1-name">阿根廷</div>
+        <div class="text-xs mt-1" style="color:var(--text-muted)">概率 <span id="final-team1-prob" class="font-bold" style="color:var(--accent-2)">18.5%</span></div>
+      </div>
+      <div class="text-center px-3">
+        <div class="score-digits" style="color:var(--text-muted)">VS</div>
+        <div class="text-xs font-bold mt-1" style="color:var(--text-muted)">决赛</div>
+      </div>
+      <div class="text-center flex-1">
+        <div class="score-team"><div class="flag" id="final-team2-flag">🇫🇷</div></div>
+        <div class="name font-bold text-sm" id="final-team2-name">法国</div>
+        <div class="text-xs mt-1" style="color:var(--text-muted)">概率 <span id="final-team2-prob" class="font-bold" style="color:var(--accent-2)">14.2%</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- tab: 胜负分析 -->
+<div id="tab-match" class="hidden fade-in">
+  <div class="card p-4 mb-4">
+    <h2 class="text-sm font-bold mb-1">⚽ 单场胜负分析</h2>
+    <p class="mb-4 text-xs" style="color:var(--text-muted)">ELO评分 + 状态 + 交锋记录</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-4">
+      <div>
+        <label class="block text-xs font-bold mb-2" style="color:var(--text2)">🏠 主队</label>
+        <select id="match-team-a" class="wc-select" onchange="updateMatchPreview()"><option value="">选择球队</option></select>
+        <div id="team-a-stats" class="mt-2 text-xs hidden p-3 card-sub">
+          <div class="flex justify-between py-1"><span style="color:var(--text-muted)">FIFA排名</span><span class="font-bold" id="team-a-rank">-</span></div>
+          <div class="flex justify-between py-1"><span style="color:var(--text-muted)">近期战绩</span><span class="font-bold" id="team-a-form">-</span></div>
+          <div class="flex justify-between py-1"><span style="color:var(--text-muted)">ELO评分</span><span class="font-bold" id="team-a-elo">-</span></div>
+        </div>
+      </div>
+      <div class="text-center">
+        <div class="score-digits mb-2" style="font-size:1rem">VS</div>
+        <button onclick="predictMatch()" class="btn-primary btn-sm w-full"><i class="fas fa-chart-simple mr-1"></i>分析</button>
+      </div>
+      <div>
+        <label class="block text-xs font-bold mb-2" style="color:var(--text2)">✈️ 客队</label>
+        <select id="match-team-b" class="wc-select" onchange="updateMatchPreview()"><option value="">选择球队</option></select>
+        <div id="team-b-stats" class="mt-2 text-xs hidden p-3 card-sub">
+          <div class="flex justify-between py-1"><span style="color:var(--text-muted)">FIFA排名</span><span class="font-bold" id="team-b-rank">-</span></div>
+          <div class="flex justify-between py-1"><span style="color:var(--text-muted)">近期战绩</span><span class="font-bold" id="team-b-form">-</span></div>
+          <div class="flex justify-between py-1"><span style="color:var(--text-muted)">ELO评分</span><span class="font-bold" id="team-b-elo">-</span></div>
+        </div>
+      </div>
+    </div>
+    <div id="match-prediction-result" class="hidden">
+      <div class="grid grid-cols-3 gap-2 mb-4">
+        <div class="card-sub p-3 text-center">
+          <div class="text-xs font-bold mb-1" style="color:var(--green-fg)">主胜</div>
+          <div class="text-2xl font-black" id="pred-home" style="color:var(--green-fg)">-</div>
+          <div class="progress-bar mt-1"><div class="progress-fill" id="pred-home-bar" style="width:0;background:var(--green-fg)"></div></div>
+        </div>
+        <div class="card-sub p-3 text-center">
+          <div class="text-xs font-bold mb-1" style="color:var(--gold-fg)">平局</div>
+          <div class="text-2xl font-black" id="pred-draw" style="color:var(--gold-fg)">-</div>
+          <div class="progress-bar mt-1"><div class="progress-fill" id="pred-draw-bar" style="width:0;background:var(--gold-fg)"></div></div>
+        </div>
+        <div class="card-sub p-3 text-center">
+          <div class="text-xs font-bold mb-1" style="color:var(--red-fg)">客胜</div>
+          <div class="text-2xl font-black" id="pred-away" style="color:var(--red-fg)">-</div>
+          <div class="progress-bar mt-1"><div class="progress-fill" id="pred-away-bar" style="width:0;background:var(--red-fg)"></div></div>
+        </div>
+      </div>
+      <div class="card-sub p-3">
+        <h4 class="text-xs font-bold mb-2" style="color:var(--text2)">📊 分析依据</h4>
+        <div class="grid grid-cols-2 gap-2 text-xs" id="match-analysis"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- tab: 比分预测 -->
+<div id="tab-score" class="hidden fade-in">
+  <div class="card p-4 mb-4">
+    <h2 class="text-sm font-bold mb-1">📊 精确比分预测</h2>
+    <p class="mb-4 text-xs" style="color:var(--text-muted)">泊松分布 + xG模型</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-4">
+      <div>
+        <label class="block text-xs font-bold mb-2" style="color:var(--text2)">🏠 主队</label>
+        <select id="score-team-a" class="wc-select"><option value="">选择球队</option></select>
+      </div>
+      <div class="text-center">
+        <div class="score-digits mb-2" style="font-size:1rem">VS</div>
+        <button onclick="predictScore()" class="btn-primary btn-sm w-full"><i class="fas fa-calculator mr-1"></i>预测</button>
+      </div>
+      <div>
+        <label class="block text-xs font-bold mb-2" style="color:var(--text2)">✈️ 客队</label>
+        <select id="score-team-b" class="wc-select"><option value="">选择球队</option></select>
+      </div>
+    </div>
+    <div id="score-prediction-result" class="hidden">
+      <div class="card-sub p-4 mb-4">
+        <h3 class="text-sm font-bold mb-3 text-center">🎯 最可能比分 TOP5</h3>
+        <div class="space-y-2" id="score-top5"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="card p-3">
+          <h4 class="text-xs font-bold mb-3" style="color:var(--text2)">📈 进球分布</h4>
+          <div class="wc-chart"><canvas id="score-chart" height="200"></canvas></div>
+        </div>
+        <div class="card p-3">
+          <h4 class="text-xs font-bold mb-3" style="color:var(--text2)">📊 数据统计</h4>
+          <div class="space-y-2 text-xs" id="score-stats"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- ===== 底部 ===== -->
+<div class="footer">
+  <p>⚽ 2026 FIFA World Cup · 实时数据推送 · 仅供娱乐参考</p>
+  <p class="mt-1">数据来源: football-data.org</p>
+</div>
+
+<script>
+// ==================== 主题切换 ====================
+function toggleTheme() {
+  const html = document.documentElement;
+  const icon = document.getElementById('theme-icon');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.setAttribute('data-theme', 'light');
+    icon.className = 'fas fa-moon';
+    localStorage.setItem('wc-theme', 'light');
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    icon.className = 'fas fa-sun';
+    localStorage.setItem('wc-theme', 'dark');
+  }
+  updateChartTheme(championChart);
+  updateChartTheme(scoreChart);
+}
+(function initTheme() {
+  const t = localStorage.getItem('wc-theme') ||
+    (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+  if (t === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.getElementById('theme-icon').className = 'fas fa-sun';
+  }
+})();
+
+function updateChartTheme(c) {
+  if (!c) return;
+  const d = document.documentElement.getAttribute('data-theme') === 'dark';
+  const color = d ? '#b0c8b0' : '#2e5a2e';
+  const grid = d ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
+  if (c.options.scales) {
+    Object.values(c.options.scales).forEach(s => {
+      if (s.ticks) s.ticks.color = color;
+      if (s.grid) s.grid.color = grid;
+    });
+  }
+  if (c.options.plugins?.legend?.labels) c.options.plugins.legend.labels.color = color;
+  c.update();
+}
+
+// ==================== 球队数据 ====================
+const teams = {
+  'Argentina':{flag:'🇦🇷',rank:1,elo:2130,form:'WWWDW',group:'J',attack:2.1,defense:0.7,xG:2.3},
+  'France':{flag:'🇫🇷',rank:2,elo:2100,form:'WWLWW',group:'I',attack:2.0,defense:0.8,xG:2.1},
+  'Brazil':{flag:'🇧🇷',rank:3,elo:2080,form:'WDWWL',group:'C',attack:1.9,defense:0.9,xG:2.0},
+  'England':{flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',rank:4,elo:2050,form:'WWWDW',group:'L',attack:1.8,defense:0.8,xG:1.9},
+  'Spain':{flag:'🇪🇸',rank:5,elo:2030,form:'LWWWW',group:'H',attack:1.9,defense:0.9,xG:2.0},
+  'Germany':{flag:'🇩🇪',rank:6,elo:2020,form:'WWWWW',group:'E',attack:2.2,defense:1.0,xG:2.2},
+  'Portugal':{flag:'🇵🇹',rank:7,elo:2000,form:'WWWWW',group:'K',attack:1.8,defense:0.9,xG:1.9},
+  'Netherlands':{flag:'🇳🇱',rank:8,elo:1980,form:'DWWLW',group:'F',attack:1.7,defense:0.9,xG:1.8},
+  'Belgium':{flag:'🇧🇪',rank:9,elo:1960,form:'WDLWW',group:'G',attack:1.8,defense:1.1,xG:1.8},
+  'Uruguay':{flag:'🇺🇾',rank:10,elo:1940,form:'WDWDW',group:'H',attack:1.5,defense:0.9,xG:1.6},
+  'Croatia':{flag:'🇭🇷',rank:11,elo:1920,form:'LWWDL',group:'L',attack:1.4,defense:1.0,xG:1.5},
+  'Mexico':{flag:'🇲🇽',rank:12,elo:1900,form:'WWWWW',group:'A',attack:1.5,defense:1.1,xG:1.6},
+  'USA':{flag:'🇺🇸',rank:13,elo:1880,form:'WWWWW',group:'D',attack:1.4,defense:1.1,xG:1.5},
+  'Japan':{flag:'🇯🇵',rank:14,elo:1860,form:'DWWLW',group:'F',attack:1.3,defense:1.0,xG:1.4},
+  'Morocco':{flag:'🇲🇦',rank:15,elo:1840,form:'DLWWW',group:'C',attack:1.2,defense:0.9,xG:1.3},
+  'Senegal':{flag:'🇸🇳',rank:16,elo:1820,form:'LWWDL',group:'I',attack:1.2,defense:1.0,xG:1.3},
+  'Switzerland':{flag:'🇨🇭',rank:17,elo:1800,form:'DWWDL',group:'B',attack:1.3,defense:1.1,xG:1.4},
+  'Canada':{flag:'🇨🇦',rank:18,elo:1780,form:'DWWWW',group:'B',attack:1.2,defense:1.2,xG:1.3},
+  'South Korea':{flag:'🇰🇷',rank:19,elo:1760,form:'WWWWW',group:'A',attack:1.1,defense:1.1,xG:1.2},
+  'Australia':{flag:'🇦🇺',rank:20,elo:1740,form:'WWWWW',group:'D',attack:1.1,defense:1.2,xG:1.2},
+  'Ecuador':{flag:'🇪🇨',rank:21,elo:1720,form:'LLWWW',group:'E',attack:1.0,defense:1.2,xG:1.1},
+  'Colombia':{flag:'🇨🇴',rank:22,elo:1700,form:'WWWWW',group:'K',attack:1.2,defense:1.1,xG:1.3},
+  'Norway':{flag:'🇳🇴',rank:23,elo:1680,form:'WWWWW',group:'I',attack:1.4,defense:1.3,xG:1.5},
+  'Sweden':{flag:'🇸🇪',rank:24,elo:1660,form:'WWWWW',group:'F',attack:1.3,defense:1.2,xG:1.4},
+  'Austria':{flag:'🇦🇹',rank:25,elo:1640,form:'WWWWW',group:'J',attack:1.2,defense:1.1,xG:1.3},
+  'Egypt':{flag:'🇪🇬',rank:26,elo:1620,form:'DWWLW',group:'G',attack:1.1,defense:1.2,xG:1.2},
+  'Iran':{flag:'🇮🇷',rank:27,elo:1600,form:'DWDWW',group:'G',attack:1.0,defense:1.1,xG:1.1},
+  'Ivory Coast':{flag:'🇨🇮',rank:28,elo:1580,form:'WWWWW',group:'E',attack:1.0,defense:1.2,xG:1.1},
+  'Scotland':{flag:'🏴󠁧󠁢󠁳󠁣󠁴󠁿',rank:29,elo:1560,form:'WLWWW',group:'C',attack:1.0,defense:1.2,xG:1.1},
+  'Ghana':{flag:'🇬🇭',rank:30,elo:1540,form:'WWWWW',group:'L',attack:1.0,defense:1.3,xG:1.1},
+  'Tunisia':{flag:'🇹🇳',rank:31,elo:1520,form:'LLWWW',group:'F',attack:0.9,defense:1.2,xG:1.0},
+  'Algeria':{flag:'🇩🇿',rank:32,elo:1500,form:'LLWWW',group:'J',attack:0.9,defense:1.2,xG:1.0},
+  'Paraguay':{flag:'🇵🇾',rank:33,elo:1480,form:'LLWWW',group:'D',attack:0.9,defense:1.3,xG:1.0},
+  'Saudi Arabia':{flag:'🇸🇦',rank:34,elo:1460,form:'DLLWW',group:'H',attack:0.8,defense:1.3,xG:0.9},
+  'DR Congo':{flag:'🇨🇩',rank:35,elo:1440,form:'DWWLW',group:'K',attack:0.8,defense:1.3,xG:0.9},
+  'Bosnia':{flag:'🇧🇦',rank:36,elo:1420,form:'DWWLW',group:'B',attack:0.8,defense:1.3,xG:0.9},
+  'Uzbekistan':{flag:'🇺🇿',rank:37,elo:1400,form:'LLWWW',group:'K',attack:0.7,defense:1.3,xG:0.8},
+  'Panama':{flag:'🇵🇦',rank:38,elo:1380,form:'LLLWW',group:'L',attack:0.7,defense:1.4,xG:0.8},
+  'Cape Verde':{flag:'🇨🇻',rank:39,elo:1360,form:'DWDWW',group:'H',attack:0.7,defense:1.4,xG:0.8},
+  'South Africa':{flag:'🇿🇦',rank:40,elo:1340,form:'LLLWW',group:'A',attack:0.7,defense:1.4,xG:0.8},
+  'Czechia':{flag:'🇨🇿',rank:41,elo:1320,form:'LLWWW',group:'A',attack:0.8,defense:1.4,xG:0.9},
+  'Qatar':{flag:'🇶🇦',rank:42,elo:1300,form:'DLLWW',group:'B',attack:0.7,defense:1.5,xG:0.8},
+  'Turkiye':{flag:'🇹🇷',rank:43,elo:1280,form:'LLLWW',group:'D',attack:0.8,defense:1.4,xG:0.9},
+  'Iraq':{flag:'🇮🇶',rank:44,elo:1260,form:'LLLWW',group:'I',attack:0.7,defense:1.5,xG:0.8},
+  'Jordan':{flag:'🇯🇴',rank:45,elo:1240,form:'LLLWW',group:'J',attack:0.6,defense:1.5,xG:0.7},
+  'Haiti':{flag:'🇭🇹',rank:46,elo:1220,form:'LLLWW',group:'C',attack:0.6,defense:1.6,xG:0.7},
+  'New Zealand':{flag:'🇳🇿',rank:47,elo:1200,form:'DWDLL',group:'G',attack:0.6,defense:1.5,xG:0.7},
+  'Curacao':{flag:'🇨🇼',rank:48,elo:1180,form:'LLLLW',group:'E',attack:0.5,defense:1.8,xG:0.6},
+};
+const teamNames = Object.keys(teams);
+
+// ==================== 本地模拟 ====================
+const matchResults = {};
+(function initMatches() {
+  const groups = [...new Set(Object.values(teams).map(t=>t.group))].sort();
+  groups.forEach(group => {
+    const gt = teamNames.filter(n => teams[n].group === group);
+    if (gt.length < 4) return;
+    const fixtures = [[0,1],[2,3],[0,2],[1,3],[0,3],[1,2]];
+    matchResults[group] = fixtures.map(([h,a]) => {
+      const t1 = teams[gt[h]], t2 = teams[gt[a]];
+      const diff = Math.round((t1.elo - t2.elo) / 200);
+      let hg = Math.max(0, Math.floor(Math.random() * 3) + diff);
+      let ag = Math.max(0, Math.floor(Math.random() * 2));
+      if (Math.random() < 0.12) { hg = Math.floor(Math.random()*2); ag = Math.floor(Math.random()*3)+1; }
+      return { home: gt[h], away: gt[a], score: hg + '-' + ag, status: 'FT' };
+    });
+  });
+})();
+
+// ==================== WebSocket ====================
+let ws = null, wsTimer = null, wsConnected = false;
+const WS_URL = (() => {
+  const loc = window.location;
+  // 直接从文件系统打开时，固定连 localhost
+  if (loc.protocol === 'file:') return 'ws://localhost:3000';
+  // 部署环境（https）→ wss:// 同域名
+  // 本地开发（http）→ ws:// 同域名同端口
+  const proto = loc.protocol === 'https:' ? 'wss:' : 'ws:';
+  return proto + '//' + loc.host;
+})();
+
+function connectWS() {
+  if (ws && ws.readyState === WebSocket.OPEN) return;
+  try { ws = new WebSocket(WS_URL); } catch(e) { updateWS(false, '未连接'); return; }
+  ws.onopen = () => { wsConnected = true; updateWS(true, '已连接'); };
+  ws.onmessage = (e) => { try { handleWS(JSON.parse(e.data)); } catch(err) {} };
+  ws.onclose = () => { wsConnected = false; updateWS(false, '已断开'); reconnectWS(); };
+  ws.onerror = () => { wsConnected = false; updateWS(false, '失败'); ws.close(); };
+}
+function reconnectWS() {
+  if (wsTimer) return;
+  wsTimer = setTimeout(() => { wsTimer = null; if (!wsConnected) connectWS(); }, 8000);
+}
+function updateWS(ok, text) {
+  const badge = document.getElementById('ws-badge');
+  const st = document.getElementById('ws-text');
+  const dot = badge.querySelector('.ws-dot');
+  if (ok) {
+    dot.className = 'ws-dot ws-connected';
+    badge.className = 'badge badge-green';
+    document.getElementById('srv-conn').innerHTML = '<span class="badge badge-green">已连接</span>';
+  } else {
+    dot.className = 'ws-dot ws-disconnected';
+    badge.className = 'badge badge-red';
+    document.getElementById('srv-conn').innerHTML = '<span class="badge badge-red">未连接</span>';
+  }
+  st.textContent = text;
+}
+
+function handleWS(data) {
+  switch (data.type) {
+    case 'initial_data':
+    case 'status_update':
+      if (data.matches) updateLiveMatches(data.matches);
+      if (data.scorers) renderScorers(data.scorers);
+      if (data.standings) renderGroupsFromServer(data.standings);
+      if (data.matches) {
+        document.getElementById('srv-matches').textContent = data.matches.length + ' 场';
+        updateDashboard(data.matches);
+      }
+      document.getElementById('srv-time').textContent = new Date().toLocaleString('zh-CN');
+      break;
+    case 'goal':
+      addEvent('⚽ 进球', (data.flag||'') + ' ' + data.team + ' · ' + data.player + ' (' + data.minute + "') " + data.newScore, 'goal');
+      break;
+    case 'match_end':
+      addEvent('🏁 完场', data.home + ' ' + data.finalScore + ' ' + data.away, 'end');
+      break;
+  }
+}
+
+// ==================== 仪表盘 ====================
+function updateDashboard(matches) {
+  if (!matches || !Array.isArray(matches)) return;
+  const total = matches.length;
+  const finished = matches.filter(m => m.status === 'FT').length;
+  const live = matches.filter(m => m.status === 'LIVE').length;
+  const upcoming = total - finished - live;
+  document.getElementById('kpi-total').textContent = total;
+  document.getElementById('kpi-finished').textContent = finished;
+  document.getElementById('kpi-live').textContent = live;
+  document.getElementById('kpi-upcoming').textContent = upcoming;
+}
+function renderDashboard() {
+  const all = Object.values(matchResults).flat();
+  updateDashboard(all.map(m => ({ ...m, status: m.status || 'FT' })));
+  renderRecentMatches();
+}
+renderDashboard();
+
+// ==================== 直播UI ====================
+function updateLiveMatches(matches) {
+  if (!matches || !Array.isArray(matches)) return;
+  const el = document.getElementById('live-matches-container');
+  const live = matches.filter(m => m.status === 'LIVE');
+  const badge = document.getElementById('live-count-badge');
+  badge.textContent = live.length + ' 场';
+  if (live.length === 0 && matches.some(m => m.status === 'FT')) {
+    const recent = matches.filter(m => m.status === 'FT').slice(-4).reverse();
+    el.innerHTML = '<div class="text-center py-2 text-xs" style="color:var(--text-muted)">暂无进行中比赛</div>';
+    el.innerHTML += recent.map(m => {
+      const [hg, ag] = typeof m.score === 'string' ? m.score.split('-').map(Number) : [m.score.home || 0, m.score.away || 0];
+      const h = teams[m.home] || { flag: '' }, a = teams[m.away] || { flag: '' };
+      return '<div class="card-sub p-2.5 mb-1.5 flex items-center justify-between">' +
+        '<div class="flex items-center gap-2"><span>' + h.flag + '</span><span class="text-xs font-medium">' + m.home + '</span></div>' +
+        '<div class="flex items-center gap-1"><span class="text-sm font-bold" style="color:var(--text0)">' + hg + '</span><span class="text-xs" style="color:var(--text-muted)">:</span><span class="text-sm font-bold" style="color:var(--text0)">' + ag + '</span></div>' +
+        '<div class="flex items-center gap-2"><span class="text-xs font-medium">' + m.away + '</span><span>' + a.flag + '</span></div></div>';
+    }).join('');
+    return;
+  }
+  if (live.length === 0) { el.innerHTML = '<div class="empty-state py-6"><i class="fas fa-satellite-dish"></i><p>等待比赛开始...</p></div>'; return; }
+  el.innerHTML = live.map(m => {
+    const h = teams[m.home] || { flag: '' }, a = teams[m.away] || { flag: '' };
+    const hg = typeof m.score === 'string' ? m.score.split('-')[0] : (m.score.home || 0);
+    const ag = typeof m.score === 'string' ? m.score.split('-')[1] : (m.score.away || 0);
+    const ev = (m.events || []).slice(-2);
+    return '<div class="card p-3 mb-2.5" style="border-color:var(--red-fg);border-width:1.5px">' +
+      '<div class="flex items-center justify-between mb-2"><span class="minute-badge">● ' + (m.minute || 0) + "'</span></div>" +
+      '<div class="flex items-center justify-between"><div class="text-center flex-1"><div style="font-size:1.6rem">' + h.flag + '</div><div class="text-xs font-bold">' + m.home + '</div></div>' +
+      '<div class="text-center px-3"><div class="score-digits" style="font-size:1.8rem">' + hg + ' - ' + ag + '</div></div>' +
+      '<div class="text-center flex-1"><div style="font-size:1.6rem">' + a.flag + '</div><div class="text-xs font-bold">' + m.away + '</div></div></div>' +
+      (ev.length ? '<div class="mt-2 pt-2 text-xs" style="border-top:1px solid var(--border-1)">' + ev.map(e => '<span class="mr-2" style="color:var(--text-muted)">⚽ ' + e.player + ' ' + e.minute + "'</span>").join('') + '</div>' : '') +
+      '</div>';
+  }).join('');
+}
+
+// ==================== 射手榜 ====================
+function renderScorers(scorers) {
+  const el = document.getElementById('top-scorers');
+  if (!scorers || !scorers.length) { el.innerHTML = '<div class="text-xs" style="color:var(--text-muted)">暂无数据</div>'; return; }
+  el.innerHTML = scorers.slice(0, 5).map((s, i) => {
+    const m = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '#' + (i + 1);
+    return '<div class="card-sub p-2 flex items-center gap-2"><span class="text-sm">' + m + '</span><span class="font-bold text-sm flex-1">' + s.player + '</span><span class="text-base font-bold" style="color:var(--accent-2)">' + s.goals + '</span><span class="text-xs" style="color:var(--text-muted)">球</span></div>';
+  }).join('');
+}
+
+// ==================== 事件流 ====================
+function addEvent(title, detail, type) {
+  const stream = document.getElementById('event-stream');
+  const empty = stream.querySelector('.empty-state');
+  if (empty) stream.innerHTML = '';
+  const e = document.createElement('div');
+  e.className = 'event-item';
+  const color = type === 'goal' ? 'var(--red-fg)' : 'var(--blue-fg)';
+  e.style.borderLeftColor = color;
+  e.innerHTML = '<div><span class="font-bold">' + title + '</span> <span style="color:var(--text1)">' + detail + '</span></div><span class="event-time">' + new Date().toLocaleTimeString() + '</span>';
+  stream.insertBefore(e, stream.firstChild);
+  while (stream.children.length > 30) stream.removeChild(stream.lastChild);
+}
+
+// ==================== 页面切换 ====================
+function switchTab(tab) {
+  ['dashboard','live','groups','knockout','champion','match','score'].forEach(t => {
+    const e = document.getElementById('tab-' + t);
+    if (e) e.classList.add('hidden');
+  });
+  const t = document.getElementById('tab-' + tab);
+  if (t) { t.classList.remove('hidden'); t.classList.add('fade-in'); }
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  const btns = document.querySelectorAll('.nav-btn');
+  const idx = ['dashboard','live','groups','knockout','champion','match','score'].indexOf(tab);
+  if (btns[idx]) btns[idx].classList.add('active');
+}
+
+// ==================== 小组积分 ====================
+function calculateStandings() {
+  const groups = {};
+  teamNames.forEach(n => { const t = teams[n]; if (!groups[t.group]) groups[t.group] = {}; groups[t.group][n] = {name:n,flag:t.flag,p:0,w:0,d:0,l:0,gf:0,ga:0,gd:0,pts:0,elo:t.elo}; });
+  Object.entries(matchResults).forEach(([g, ms]) => {
+    ms.forEach(m => {
+      const [hg, ag] = m.score.split('-').map(Number);
+      const h = groups[g]?.[m.home], a = groups[g]?.[m.away];
+      if (!h || !a) return;
+      h.p++; a.p++; h.gf += hg; h.ga += ag; a.gf += ag; a.ga += hg;
+      if (hg > ag) { h.w++; h.pts += 3; a.l++; } else if (hg < ag) { a.w++; a.pts += 3; h.l++; } else { h.d++; a.d++; h.pts++; a.pts++; }
+    });
+  });
+  Object.values(groups).forEach(g => Object.values(g).forEach(t => { t.gd = t.gf - t.ga; }));
+  const r = {};
+  Object.entries(groups).forEach(([g, t]) => { r[g] = Object.values(t).sort((a,b) => b.pts - a.pts || b.gd - a.gd || b.gf - a.gf || b.elo - a.elo); });
+  return r;
+}
+
+function renderGroupsFromServer(s) {
+  const container = document.getElementById('groups-container');
+  if (!s) { renderGroups(); return; }
+  container.innerHTML = '';
+  Object.entries(s).forEach(([group, table]) => {
+    let html = '<div class="card p-4"><h3 class="text-sm font-bold mb-3" style="color:var(--accent-1)">' + group + ' 组</h3><table class="group-table"><tr><th>#</th><th class="left">球队</th><th>赛</th><th>胜</th><th>平</th><th>负</th><th>进</th><th>失</th><th>净</th><th>分</th></tr>';
+    table.forEach((team, idx) => {
+      const cls = idx < 2 ? 'qualified' : idx === 2 ? 'third-place' : 'eliminated';
+      html += '<tr class="' + cls + '"><td class="font-bold">' + (idx+1) + '</td><td class="left"><span class="text-base mr-1">' + team.flag + '</span><span class="font-semibold text-xs">' + team.name + '</span></td><td>' + team.p + '</td><td>' + team.w + '</td><td>' + team.d + '</td><td>' + team.l + '</td><td class="font-semibold">' + team.gf + '</td><td>' + team.ga + '</td><td class="font-bold">' + (team.gd > 0 ? '+' : '') + team.gd + '</td><td class="font-black text-base" style="color:var(--accent-2)">' + team.pts + '</td></tr>';
+    });
+    html += '</table></div>';
+    container.innerHTML += html;
+  });
+}
+function renderGroups() { renderGroupsFromServer(calculateStandings()); }
+
+// ==================== 淘汰赛 ====================
+function renderKnockout() {
+  const el = document.getElementById('knockout-bracket');
+  el.innerHTML = [
+    { n: '1/16决赛', m: 16 },
+    { n: '1/8决赛', m: 8 },
+    { n: '1/4决赛', m: 4 },
+    { n: '半决赛', m: 2 },
+    { n: '决赛', m: 1 }
+  ].map(r =>
+    '<div class="bracket-round"><div class="bracket-round-title">' + r.n + '</div>' +
+    Array(r.m).fill(0).map(() =>
+      '<div class="bracket-match"><div class="bracket-line"><span class="bracket-team" style="color:var(--text-muted)">TBD</span><span class="bracket-score" style="color:var(--text-muted)">-</span></div><div class="bracket-line"><span class="bracket-team" style="color:var(--text-muted)">TBD</span><span class="bracket-score" style="color:var(--text-muted)">-</span></div></div>'
+    ).join('') + '</div>'
+  ).join('');
+}
+
+// ==================== 冠军预测 ====================
+let championChart = null;
+function runChampionSim() {
+  document.getElementById('champion-empty').classList.add('hidden');
+  document.getElementById('champion-results').classList.remove('hidden');
+  document.getElementById('likely-final').classList.remove('hidden');
+  const N = 10000, wins = {};
+  teamNames.forEach(n => wins[n] = 0);
+  const list = Object.entries(teams);
+  for (let i = 0; i < N; i++) {
+    const weights = list.map(([n, d]) => Math.pow(10, d.elo / 400));
+    const total = weights.reduce((a, b) => a + b, 0);
+    let r = Math.random() * total, winner = list[0][0];
+    for (const [n, d] of list) { r -= Math.pow(10, d.elo / 400); if (r <= 0) { winner = n; break; } }
+    wins[winner]++;
+  }
+  const sorted = Object.entries(wins).sort((a, b) => b[1] - a[1]).slice(0, 10);
+  const labels = sorted.map(([n]) => n);
+  const data = sorted.map(([n, c]) => (c / N * 100).toFixed(1));
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const ctx = document.getElementById('champion-chart').getContext('2d');
+  if (championChart) championChart.destroy();
+  championChart = new Chart(ctx, {
+    type: 'bar',
+    data: { labels: labels.map(n => teams[n].flag + ' ' + n), datasets: [{ label: '夺冠概率 (%)', data: data, backgroundColor: labels.map((_, i) => i < 3 ? (isDark ? 'rgba(249,224,118,0.7)' : 'rgba(200,164,21,0.7)') : 'rgba(160,180,160,0.3)'), borderColor: labels.map((_, i) => i < 3 ? (isDark ? 'rgba(249,224,118,1)' : 'rgba(200,164,21,1)') : 'rgba(160,180,160,0.5)'), borderWidth: 2, borderRadius: 6 }] },
+    options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { grid: { color: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)' }, ticks: { color: isDark ? '#b0c8b0' : '#2e5a2e' } }, x: { grid: { display: false }, ticks: { color: isDark ? '#b0c8b0' : '#2e5a2e', maxRotation: 45 } } } }
+  });
+  document.getElementById('champion-list').innerHTML = sorted.map(([name, count], i) => {
+    const p = (count / N * 100).toFixed(1);
+    const m = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i + 1) + '.';
+    return '<div class="card p-3 flex items-center gap-3"><div class="text-lg">' + m + '</div><span style="font-size:1.6rem">' + teams[name].flag + '</span><div class="flex-1"><div class="font-bold text-sm">' + name + '</div><div class="progress-bar mt-1"><div class="progress-fill" style="width:' + p + '%;background:' + (i < 3 ? 'var(--accent-2)' : 'var(--blue-fg)') + '"></div></div></div><div class="text-lg font-bold" style="color:' + (i < 3 ? 'var(--accent-2)' : 'var(--text-muted)') + '">' + p + '%</div></div>';
+  }).join('');
+  document.getElementById('final-team1-flag').textContent = teams[sorted[0][0]].flag;
+  document.getElementById('final-team1-name').textContent = sorted[0][0];
+  document.getElementById('final-team1-prob').textContent = data[0] + '%';
+  document.getElementById('final-team2-flag').textContent = teams[sorted[1][0]].flag;
+  document.getElementById('final-team2-name').textContent = sorted[1][0];
+  document.getElementById('final-team2-prob').textContent = data[1] + '%';
+}
+function resetChampion() {
+  document.getElementById('champion-empty').classList.remove('hidden');
+  document.getElementById('champion-results').classList.add('hidden');
+  document.getElementById('likely-final').classList.add('hidden');
+}
+
+// ==================== 单场分析 ====================
+function updateMatchPreview() {
+  const a = document.getElementById('match-team-a').value, b = document.getElementById('match-team-b').value;
+  if (a && teams[a]) {
+    document.getElementById('team-a-stats').classList.remove('hidden');
+    document.getElementById('team-a-rank').textContent = teams[a].rank;
+    document.getElementById('team-a-form').textContent = teams[a].form;
+    document.getElementById('team-a-elo').textContent = teams[a].elo;
+  }
+  if (b && teams[b]) {
+    document.getElementById('team-b-stats').classList.remove('hidden');
+    document.getElementById('team-b-rank').textContent = teams[b].rank;
+    document.getElementById('team-b-form').textContent = teams[b].form;
+    document.getElementById('team-b-elo').textContent = teams[b].elo;
+  }
+}
+
+function predictMatch() {
+  const a = document.getElementById('match-team-a').value, b = document.getElementById('match-team-b').value;
+  if (!a || !b || a === b) { alert('请选择两支不同的球队'); return; }
+  const ta = teams[a], tb = teams[b];
+  const ea = 1 / (1 + Math.pow(10, (tb.elo - ta.elo) / 400)), eb = 1 - ea;
+  const ha = 0.08, dp = 0.25, hw = Math.min(0.85, ea + ha - dp/2), aw = Math.max(0.05, eb - ha - dp/2), dr = 1 - hw - aw;
+  document.getElementById('match-prediction-result').classList.remove('hidden');
+  document.getElementById('pred-home').textContent = (hw * 100).toFixed(1) + '%';
+  document.getElementById('pred-draw').textContent = (dr * 100).toFixed(1) + '%';
+  document.getElementById('pred-away').textContent = (aw * 100).toFixed(1) + '%';
+  setTimeout(() => {
+    document.getElementById('pred-home-bar').style.width = (hw * 100) + '%';
+    document.getElementById('pred-draw-bar').style.width = (dr * 100) + '%';
+    document.getElementById('pred-away-bar').style.width = (aw * 100) + '%';
+  }, 100);
+  const h2h = Math.random() > 0.5 ? a : b;
+  document.getElementById('match-analysis').innerHTML =
+    '<div class="card-sub p-2"><div class="text-xs font-bold mb-1" style="color:var(--text-muted)">FIFA排名差</div><div class="font-bold" style="color:var(--text0)">' + Math.abs(ta.rank - tb.rank) + ' 位</div></div>' +
+    '<div class="card-sub p-2"><div class="text-xs font-bold mb-1" style="color:var(--text-muted)">ELO评分差</div><div class="font-bold" style="color:var(--text0)">' + Math.abs(ta.elo - tb.elo) + ' 分</div></div>' +
+    '<div class="card-sub p-2"><div class="text-xs font-bold mb-1" style="color:var(--text-muted)">近期状态</div><div class="font-bold" style="color:var(--text0)">' + ta.form.slice(-3) + ' vs ' + tb.form.slice(-3) + '</div></div>' +
+    '<div class="card-sub p-2"><div class="text-xs font-bold mb-1" style="color:var(--text-muted)">交锋记录</div><div class="font-bold" style="color:var(--text0)">' + h2h + '占优</div></div>';
+}
+
+// ==================== 比分预测 ====================
+let scoreChart = null;
+function predictScore() {
+  const a = document.getElementById('score-team-a').value, b = document.getElementById('score-team-b').value;
+  if (!a || !b || a === b) { alert('请选择两支不同的球队'); return; }
+  const ta = teams[a], tb = teams[b];
+  const la = ta.attack * tb.defense * 1.1, lb = tb.attack * ta.defense;
+  function poisson(lambda, k) { return Math.exp(-lambda) * Math.pow(lambda, k) / fact(k); }
+  function fact(n) { return n <= 1 ? 1 : n * fact(n - 1); }
+  const scores = [];
+  for (let i = 0; i <= 4; i++) { for (let j = 0; j <= 4; j++) { scores.push({ score: i + '-' + j, prob: poisson(la, i) * poisson(lb, j), home: i, away: j }); } }
+  scores.sort((a, b) => b.prob - a.prob);
+  const top5 = scores.slice(0, 5);
+  document.getElementById('score-prediction-result').classList.remove('hidden');
+  document.getElementById('score-top5').innerHTML = top5.map((s, i) => {
+    const isFirst = i === 0;
+    return '<div class="card-sub p-2.5 flex items-center gap-3" style="border:' + (isFirst ? '2px solid var(--accent-2)' : '1px solid var(--border-1)') + '"><div class="w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs" style="background:' + (isFirst ? 'var(--accent-2)' : 'var(--bg3)') + ';color:' + (isFirst ? '#000' : 'var(--text-muted)') + '">' + (i + 1) + '</div><div class="flex-1 flex items-center justify-center gap-2"><span style="font-size:1.2rem">' + ta.flag + '</span><span class="text-lg font-bold" style="color:var(--text0)">' + s.score + '</span><span style="font-size:1.2rem">' + tb.flag + '</span></div><div><div class="text-sm font-bold" style="color:' + (isFirst ? 'var(--accent-2)' : 'var(--text-muted)') + '">' + (s.prob * 100).toFixed(1) + '%</div><div class="progress-bar" style="width:64px"><div class="progress-fill" style="width:' + (s.prob * 100) + '%;background:' + (isFirst ? 'var(--accent-2)' : 'var(--blue-fg)') + '"></div></div></div></div>';
+  }).join('');
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const ctx = document.getElementById('score-chart').getContext('2d');
+  if (scoreChart) scoreChart.destroy();
+  scoreChart = new Chart(ctx, {
+    type: 'line',
+    data: { labels: ['0球','1球','2球','3球','4球'], datasets: [{ label: a + ' (主)', data: [0,1,2,3,4].map(k => (poisson(la, k) * 100).toFixed(1)), borderColor: '#4caf50', backgroundColor: 'rgba(76,175,80,0.1)', fill: true, tension: 0.4 }, { label: b + ' (客)', data: [0,1,2,3,4].map(k => (poisson(lb, k) * 100).toFixed(1)), borderColor: '#e53935', backgroundColor: 'rgba(229,57,53,0.1)', fill: true, tension: 0.4 }] },
+    options: { responsive: true, plugins: { legend: { labels: { color: isDark ? '#b0c8b0' : '#2e5a2e' } } }, scales: { y: { grid: { color: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)' }, ticks: { color: isDark ? '#b0c8b0' : '#2e5a2e' } }, x: { grid: { display: false }, ticks: { color: isDark ? '#b0c8b0' : '#2e5a2e' } } } }
+  });
+  const overProb = scores.filter(s => s.home + s.away > 2).reduce((a, b) => a + b.prob, 0);
+  document.getElementById('score-stats').innerHTML =
+    '<div class="flex justify-between py-1.5" style="border-bottom:1px solid var(--border-1)"><span class="text-xs" style="color:var(--text-muted)">' + ta.flag + ' ' + a + ' 预期进球</span><span class="font-bold text-xs" style="color:var(--green-fg)">' + la.toFixed(2) + '</span></div>' +
+    '<div class="flex justify-between py-1.5" style="border-bottom:1px solid var(--border-1)"><span class="text-xs" style="color:var(--text-muted)">' + tb.flag + ' ' + b + ' 预期进球</span><span class="font-bold text-xs" style="color:var(--red-fg)">' + lb.toFixed(2) + '</span></div>' +
+    '<div class="flex justify-between py-1.5" style="border-bottom:1px solid var(--border-1)"><span class="text-xs" style="color:var(--text-muted)">总进球预期</span><span class="font-bold text-xs" style="color:var(--accent-2)">' + (la + lb).toFixed(2) + '</span></div>' +
+    '<div class="flex justify-between py-1.5" style="border-bottom:1px solid var(--border-1)"><span class="text-xs" style="color:var(--text-muted)">大球 (>2.5)</span><span class="font-bold text-xs" style="color:var(--blue-fg)">' + (overProb * 100).toFixed(1) + '%</span></div>' +
+    '<div class="flex justify-between py-1.5"><span class="text-xs" style="color:var(--text-muted)">双方进球</span><span class="font-bold text-xs" style="color:var(--accent-2)">' + ((1 - poisson(la, 0)) * (1 - poisson(lb, 0)) * 100).toFixed(1) + '%</span></div>';
+}
+
+// ==================== 本地射手榜 ====================
+function generateLocalScorers() {
+  const players = ['Messi','Mbappe','Kane','Vinicius Jr.','Musiala','Bellingham','Ronaldo','Depay','Son Heung-min','Lautaro'];
+  return players.map((p, i) => ({ player: p, goals: Math.floor(Math.random() * 3) + 5 - i })).sort((a, b) => b.goals - a.goals);
+}
+
+// ==================== 最近赛果 ====================
+function renderRecentMatches() {
+  const el = document.getElementById('recent-matches');
+  const all = Object.values(matchResults).flat().filter(m => m.status === 'FT').slice(-6).reverse();
+  if (!all.length) { el.innerHTML = '<div class="text-xs" style="color:var(--text-muted)">暂无数据</div>'; return; }
+  el.innerHTML = all.map(m => {
+    const [hg, ag] = m.score.split('-').map(Number);
+    return '<div class="card-sub p-2.5 flex items-center justify-between"><div class="flex items-center gap-2 flex-1 min-w-0"><span>' + (teams[m.home]?.flag || '') + '</span><span class="text-xs font-medium truncate">' + m.home + '</span></div><div class="flex items-center gap-1"><span class="text-sm font-bold" style="color:' + (hg > ag ? 'var(--green-fg)' : 'var(--text-muted)') + '">' + hg + '</span><span class="text-xs" style="color:var(--text-muted)">:</span><span class="text-sm font-bold" style="color:' + (ag > hg ? 'var(--green-fg)' : 'var(--text-muted)') + '">' + ag + '</span></div><div class="flex items-center gap-2 flex-1 min-w-0 justify-end"><span class="text-xs font-medium truncate">' + m.away + '</span><span>' + (teams[m.away]?.flag || '') + '</span></div></div>';
+  }).join('');
+}
+
+// ==================== 填充球队选择器 ====================
+function populateTeamSelects() {
+  ['match-team-a','match-team-b','score-team-a','score-team-b'].forEach(id => {
+    const sel = document.getElementById(id);
+    sel.innerHTML = '<option value="">选择球队</option>' + teamNames.map(n => '<option value="' + n + '">' + teams[n].flag + ' ' + n + '</option>').join('');
+  });
+}
+
+// ==================== 启动 ====================
+populateTeamSelects();
+renderGroups();
+renderKnockout();
+connectWS();
+</script>
+</body>
+</html>

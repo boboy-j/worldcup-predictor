@@ -1,0 +1,21 @@
+{
+  "name": "worldcup2026-predictor",
+  "version": "2.0.0",
+  "description": "2026 FIFA World Cup Live Monitor & Predictor - PWA App",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "ws": "^8.16.0",
+    "node-fetch": "^2.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atomgit/worldcup2026-predictor"
+  }
+}

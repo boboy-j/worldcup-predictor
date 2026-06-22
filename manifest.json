@@ -1,0 +1,25 @@
+{
+  "name": "2026世界杯实时预测",
+  "short_name": "世界杯2026",
+  "description": "2026美加墨世界杯实时监测与AI预测",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#d97706",
+  "orientation": "portrait-primary",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Ccircle cx='256' cy='256' r='230' fill='%230f172a' stroke='%23d97706' stroke-width='12'/%3E%3Ctext x='256' y='310' text-anchor='middle' font-size='320' fill='%23d97706'%3E🏆%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Ccircle cx='96' cy='96' r='86' fill='%230f172a' stroke='%23d97706' stroke-width='5'/%3E%3Ctext x='96' y='118' text-anchor='middle' font-size='120' fill='%23d97706'%3E🏆%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
