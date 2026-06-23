@@ -922,6 +922,7 @@ function handleWS(data) {
       if (data.matches) {
         document.getElementById('srv-matches').textContent = data.matches.length + ' 场';
         updateDashboard(data.matches);
+        renderRecentMatches(data.matches); // 用 API 真实数据更新最近赛果
       }
       document.getElementById('srv-time').textContent = new Date().toLocaleString('zh-CN');
       break;
@@ -1293,12 +1294,14 @@ setTimeout(() => {
 }, 10000);
 
 // ==================== 最近赛果 ====================
-function renderRecentMatches() {
+function renderRecentMatches(matches) {
   const el = document.getElementById('recent-matches');
-  const all = Object.values(matchResults).flat().filter(m => m.status === 'FT').slice(-6).reverse();
+  const src = matches || Object.values(matchResults).flat();
+  const all = src.filter(m => m.status === 'FT').slice(-6).reverse();
   if (!all.length) { el.innerHTML = '<div class="text-xs" style="color:var(--text-muted)">暂无数据</div>'; return; }
   el.innerHTML = all.map(m => {
-    const [hg, ag] = m.score.split('-').map(Number);
+    const hg = typeof m.score === 'object' ? (m.score.home || 0) : Number(m.score.split('-')[0]);
+    const ag = typeof m.score === 'object' ? (m.score.away || 0) : Number(m.score.split('-')[1]);
     return '<div class="card-sub p-2.5 flex items-center justify-between"><div class="flex items-center gap-2 flex-1 min-w-0"><span>' + (teams[m.home]?.flag || '') + '</span><span class="text-xs font-medium truncate">' + m.home + '</span></div><div class="flex items-center gap-1"><span class="text-sm font-bold" style="color:' + (hg > ag ? 'var(--green-fg)' : 'var(--text-muted)') + '">' + hg + '</span><span class="text-xs" style="color:var(--text-muted)">:</span><span class="text-sm font-bold" style="color:' + (ag > hg ? 'var(--green-fg)' : 'var(--text-muted)') + '">' + ag + '</span></div><div class="flex items-center gap-2 flex-1 min-w-0 justify-end"><span class="text-xs font-medium truncate">' + m.away + '</span><span>' + (teams[m.away]?.flag || '') + '</span></div></div>';
   }).join('');
 }
