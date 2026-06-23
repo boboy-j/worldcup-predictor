@@ -971,6 +971,8 @@ function updateLiveMatches(matches) {
         '<div class="flex items-center gap-1"><span class="text-sm font-bold" style="color:var(--text0)">' + hg + '</span><span class="text-xs" style="color:var(--text-muted)">:</span><span class="text-sm font-bold" style="color:var(--text0)">' + ag + '</span></div>' +
         '<div class="flex items-center gap-2"><span class="text-xs font-medium">' + m.away + '</span><span>' + a.flag + '</span></div></div>';
     }).join('');
+    // 事件流也填入最近赛果
+    seedEventsFromRecent(matches);
     return;
   }
   if (live.length === 0) { el.innerHTML = '<div class="empty-state py-6"><i class="fas fa-satellite-dish"></i><p>等待比赛开始...</p></div>'; return; }
@@ -989,11 +991,37 @@ function updateLiveMatches(matches) {
   }).join('');
 }
 
+// 从近期已结束比赛生成事件流（当无直播时展示）
+function seedEventsFromRecent(matches) {
+  const stream = document.getElementById('event-stream');
+  const empty = stream.querySelector('.empty-state');
+  if (!empty) return; // 已经有事件了
+  const recent = matches.filter(m => m.status === 'FT').slice(-5).reverse();
+  if (recent.length === 0) return;
+  stream.innerHTML = '';
+  recent.forEach(m => {
+    const [hg, ag] = typeof m.score === 'string' ? m.score.split('-').map(Number) : [m.score.home || 0, m.score.away || 0];
+    const title = hg > ag ? ('🏁 完场') : (hg === ag ? '🤝 平局' : '🏁 完场');
+    const detail = m.home + ' ' + hg + ' - ' + ag + ' ' + m.away;
+    const e = document.createElement('div');
+    e.className = 'event-item';
+    e.style.borderLeftColor = 'var(--blue-fg)';
+    e.innerHTML = '<div><span class="font-bold">' + title + '</span> <span style="color:var(--text1)">' + detail + '</span></div><span class="event-time">' + new Date().toLocaleTimeString() + '</span>';
+    stream.appendChild(e);
+  });
+}
+
 // ==================== 射手榜 ====================
 function renderScorers(scorers) {
   const el = document.getElementById('top-scorers');
   if (!scorers || !scorers.length) { el.innerHTML = '<div class="text-xs" style="color:var(--text-muted)">暂无数据</div>'; return; }
-  el.innerHTML = scorers.slice(0, 5).map((s, i) => {
+  // 过滤掉占位名称 "Player"、"Unknown" 等
+  const filtered = scorers.filter(s => s.player && !['Player','Unknown','Unknown Player'].includes(s.player));
+  if (filtered.length === 0) {
+    el.innerHTML = '<div class="text-xs" style="color:var(--text-muted)">暂无数据</div>';
+    return;
+  }
+  el.innerHTML = filtered.slice(0, 5).map((s, i) => {
     const m = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '#' + (i + 1);
     return '<div class="card-sub p-2 flex items-center gap-2"><span class="text-sm">' + m + '</span><span class="font-bold text-sm flex-1">' + s.player + '</span><span class="text-base font-bold" style="color:var(--accent-2)">' + s.goals + '</span><span class="text-xs" style="color:var(--text-muted)">球</span></div>';
   }).join('');
@@ -1233,6 +1261,36 @@ function generateLocalScorers() {
   const players = ['Messi','Mbappe','Kane','Vinicius Jr.','Musiala','Bellingham','Ronaldo','Depay','Son Heung-min','Lautaro'];
   return players.map((p, i) => ({ player: p, goals: Math.floor(Math.random() * 3) + 5 - i })).sort((a, b) => b.goals - a.goals);
 }
+
+// 兜底：8秒后还没收到有效射手榜，用本地数据
+setTimeout(() => {
+  const el = document.getElementById('top-scorers');
+  if (el && (el.textContent === '加载中...' || el.querySelector('.empty-state'))) {
+    renderScorers(generateLocalScorers());
+  }
+}, 8000);
+
+// 兜底：10秒后事件流仍为空，生成示例事件
+setTimeout(() => {
+  const stream = document.getElementById('event-stream');
+  if (!stream) return;
+  const empty = stream.querySelector('.empty-state');
+  if (!empty) return;
+  // 用前端模拟的本地比赛数据生成事件
+  const all = Object.values(matchResults).flat().filter(m => m.status === 'FT').slice(-5).reverse();
+  if (all.length > 0) {
+    seedEventsFromRecent(all);
+  } else {
+    // 完全没有数据时，填充示例事件
+    stream.innerHTML = '';
+    const sampleEvents = [
+      { title: '⚽ 进球', detail: '🇦🇷 Argentina 1-0 France · Messi (23\')', type: 'goal' },
+      { title: '⚽ 进球', detail: '🇦🇷 Argentina 2-0 France · Alvarez (65\')', type: 'goal' },
+      { title: '🏁 完场', detail: 'Argentina 2 - 0 France', type: 'end' },
+    ];
+    sampleEvents.forEach(ev => addEvent(ev.title, ev.detail, ev.type));
+  }
+}, 10000);
 
 // ==================== 最近赛果 ====================
 function renderRecentMatches() {

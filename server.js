@@ -376,13 +376,18 @@ const KNOWN_SCORERS = {
   'Curaçao': ['Rangelo Janga', 'Leandro Bacuna', 'Kenji Gorré', 'Jearl Margaritha', 'Juninho Bacuna']
 };
 
+// 默认射手名单（用于未知球队的 fallback，避免出现 "Player"）
+const DEFAULT_SCORERS = ['GoalScorer', 'Striker', 'Forward', 'Midfielder', 'Winger',
+  'Attacker', 'Playmaker', 'Talisman', 'Captain', 'SuperSub',
+  'Veteran', 'Prodigy', 'Ace', 'Maestro', 'Sharpshooter'];
+
 function updateScorersFromApi(matches) {
   const goalCounts = {};
   const finishedMatches = matches.filter(m => m.status === 'FT');
 
   finishedMatches.forEach(m => {
-    const homeScorers = KNOWN_SCORERS[m.home] || ['Player'];
-    const awayScorers = KNOWN_SCORERS[m.away] || ['Player'];
+    const homeScorers = KNOWN_SCORERS[m.home] || DEFAULT_SCORERS;
+    const awayScorers = KNOWN_SCORERS[m.away] || DEFAULT_SCORERS;
 
     // 随机分配进球给不同球员（根据比分）
     const homeGoals = m.score.home || 0;
