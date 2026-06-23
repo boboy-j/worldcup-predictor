@@ -141,6 +141,10 @@ body {
   border: 1px solid transparent;
   cursor: pointer;
   transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 .nav-btn:hover { background: var(--surface-hover); color: var(--text0); }
 .nav-btn.active {
@@ -510,11 +514,11 @@ body {
 <!-- ===== 导航 ===== -->
 <nav class="nav-scroll">
   <div class="max-w-7xl mx-auto px-3 py-2">
-    <div class="flex gap-1.5" style="overflow:visible;white-space:nowrap">
-      <button class="nav-btn active" data-tab="dashboard" onclick="switchTab('dashboard')">📊 总览</button>
+    <div class="flex w-full gap-1" style="overflow:visible;white-space:nowrap">
+      <button class="nav-btn active flex-1 justify-center" data-tab="dashboard" onclick="switchTab('dashboard')">📊 总览</button>
 
-      <div class="dropdown-wrapper">
-        <button class="nav-btn dropdown-btn" data-tab="live" onclick="toggleDropdown('matches-dropdown')">
+      <div class="dropdown-wrapper flex-1">
+        <button class="nav-btn dropdown-btn w-full justify-center" data-tab="live" onclick="toggleDropdown('matches-dropdown')">
           ⚽ 赛事 <i class="fas fa-chevron-down" style="font-size:9px;margin-left:3px"></i>
         </button>
         <div id="matches-dropdown" class="dropdown-menu">
@@ -524,8 +528,8 @@ body {
         </div>
       </div>
 
-      <div class="dropdown-wrapper">
-        <button class="nav-btn dropdown-btn" data-tab="champion" onclick="toggleDropdown('pred-dropdown')">
+      <div class="dropdown-wrapper flex-1">
+        <button class="nav-btn dropdown-btn w-full justify-center" data-tab="champion" onclick="toggleDropdown('pred-dropdown')">
           📈 预测 <i class="fas fa-chevron-down" style="font-size:9px;margin-left:3px"></i>
         </button>
         <div id="pred-dropdown" class="dropdown-menu">
