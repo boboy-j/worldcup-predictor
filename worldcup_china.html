@@ -53,89 +53,11 @@
       font-weight: 600;
     }
 
-    /* ===== Hero 大横幅 ===== */
-    .hero {
-      position: relative;
-      padding: 60px 20px 50px;
+    /* ===== 加油面板（最顶部） ===== */
+    .cheer-section {
+      padding: 40px 20px 20px;
       text-align: center;
-      background: linear-gradient(135deg, #0f1421 0%, #1a1030 40%, #0f1421 100%);
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at 30% 50%, rgba(222,41,16,0.08) 0%, transparent 50%),
-                  radial-gradient(circle at 70% 50%, rgba(255,215,0,0.06) 0%, transparent 50%);
-      animation: heroGlow 8s ease-in-out infinite alternate;
-    }
-    @keyframes heroGlow {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(-20px, -20px); }
-    }
-    .hero-flag {
-      font-size: 80px;
-      line-height: 1;
-      margin-bottom: 12px;
-      animation: flagPulse 2s ease-in-out infinite;
-      position: relative;
-    }
-    @keyframes flagPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.06); }
-    }
-    .hero-title {
-      font-size: 36px;
-      font-weight: 800;
-      color: #ffd700;
-      letter-spacing: 4px;
-      position: relative;
-    }
-    .hero-title small {
-      display: block;
-      font-size: 16px;
-      font-weight: 400;
-      color: #aaa;
-      letter-spacing: 2px;
-      margin-top: 8px;
-    }
-    .hero-sub {
-      margin-top: 16px;
-      font-size: 15px;
-      color: #888;
-      position: relative;
-    }
-    .hero-sub span {
-      color: #ffd700;
-      font-weight: 600;
-    }
-
-    /* ===== 加油面板 ===== */
-    .cheer-panel {
-      max-width: 700px;
-      margin: -30px auto 0;
-      padding: 0 20px;
-      position: relative;
-      z-index: 10;
-    }
-    .cheer-card {
-      background: linear-gradient(145deg, #1a1f35, #12172a);
-      border: 1px solid rgba(255,215,0,0.12);
-      border-radius: 20px;
-      padding: 36px 28px 30px;
-      text-align: center;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.4);
-    }
-    .cheer-card .label {
-      font-size: 13px;
-      color: #888;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 6px;
+      background: linear-gradient(135deg, #0f1421 0%, #1a1030 50%, #0f1421 100%);
     }
     .cheer-count-number {
       font-size: 64px;
@@ -146,9 +68,9 @@
       line-height: 1;
     }
     .cheer-count-unit {
-      font-size: 16px;
+      font-size: 15px;
       color: #888;
-      margin: 4px 0 20px;
+      margin: 6px 0 20px;
     }
     .cheer-btn {
       display: inline-flex;
@@ -172,32 +94,27 @@
     }
     .cheer-btn:active { transform: scale(0.96); }
     .cheer-btn .flag-icon { font-size: 30px; }
-    .cheer-btn .btn-pulse {
-      position: absolute;
-      inset: -4px;
-      border-radius: 64px;
-      border: 2px solid rgba(255,215,0,0.2);
-      animation: btnRing 2s ease-in-out infinite;
-    }
-    @keyframes btnRing {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.04); opacity: 0.4; }
+    .cheer-note {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #666;
     }
 
     /* ===== 排行榜 ===== */
     .rank-section {
       max-width: 700px;
-      margin: 28px auto 0;
-      padding: 0 20px;
+      margin: 24px auto 0;
+      padding: 0 20px 40px;
     }
     .rank-card {
       background: linear-gradient(145deg, #191f33, #101524);
       border: 1px solid rgba(255,215,0,0.06);
       border-radius: 16px;
       padding: 20px 24px;
+      text-align: left;
     }
     .rank-card h3 {
-      font-size: 15px;
+      font-size: 14px;
       color: #aaa;
       margin-bottom: 12px;
       font-weight: 600;
@@ -220,13 +137,13 @@
     }
     .rank-item:hover { background: rgba(255,255,255,0.06); }
     .rank-num {
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       color: #fff;
     }
@@ -234,65 +151,97 @@
     .rank-num.silver { background: linear-gradient(135deg, #c0c0c0, #a0a0a0); }
     .rank-num.bronze { background: linear-gradient(135deg, #cd7f32, #b8692a); }
     .rank-num.normal { background: rgba(255,255,255,0.08); color: #888; }
-    .rank-name { flex: 1; font-size: 15px; font-weight: 600; color: #fff; }
-    .rank-score { font-size: 14px; color: #ffd700; font-weight: 700; }
+    .rank-name { flex: 1; font-size: 14px; font-weight: 600; color: #fff; }
+    .rank-score { font-size: 13px; color: #ffd700; font-weight: 700; }
 
-    /* ===== 中国力量 ===== */
+    /* ===== 世界杯里的中国印记 ===== */
     .china-section {
       max-width: 1100px;
-      margin: 48px auto;
+      margin: 0 auto;
       padding: 0 20px;
     }
     .section-title {
       text-align: center;
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
+      color: #ffd700;
     }
-    .section-title .cn { color: #ffd700; }
     .section-sub {
       text-align: center;
-      font-size: 14px;
+      font-size: 13px;
       color: #888;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
-    .category-grid {
+    .sponsor-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 36px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 40px;
     }
-    .cat-card {
+    .sponsor-card {
       background: linear-gradient(145deg, #191f33, #101524);
       border: 1px solid rgba(255,215,0,0.08);
       border-radius: 14px;
-      padding: 20px;
+      padding: 24px 16px;
+      text-align: center;
       transition: 0.3s;
       cursor: default;
     }
-    .cat-card:hover {
+    .sponsor-card:hover {
       border-color: rgba(255,215,0,0.25);
       transform: translateY(-3px);
       box-shadow: 0 8px 24px rgba(255,215,0,0.06);
     }
-    .cat-card .icon { font-size: 32px; margin-bottom: 6px; }
-    .cat-card .name { font-size: 17px; font-weight: 700; color: #fff; }
-    .cat-card .desc { font-size: 13px; color: #999; margin-top: 4px; line-height: 1.5; }
-    .cat-card .badge {
+    .sponsor-card .icon { font-size: 36px; margin-bottom: 8px; }
+    .sponsor-card .name { font-size: 16px; font-weight: 700; color: #fff; }
+    .sponsor-card .desc { font-size: 12px; color: #999; margin-top: 4px; line-height: 1.4; }
+    .sponsor-card .badge {
       display: inline-block;
       margin-top: 10px;
       padding: 3px 12px;
       border-radius: 12px;
       background: rgba(255,215,0,0.1);
       color: #ffd700;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
     }
+
+    /* ===== 更多中国元素 ===== */
+    .more-title {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #ffd700;
+    }
+    .element-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+    .element-card {
+      background: linear-gradient(145deg, #191f33, #101524);
+      border: 1px solid rgba(255,215,0,0.06);
+      border-radius: 14px;
+      padding: 20px;
+      transition: 0.3s;
+      cursor: default;
+    }
+    .element-card:hover {
+      border-color: rgba(255,215,0,0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(255,215,0,0.06);
+    }
+    .element-card .icon { font-size: 28px; margin-bottom: 6px; }
+    .element-card .name { font-size: 15px; font-weight: 700; color: #fff; }
+    .element-card .desc { font-size: 12px; color: #999; margin-top: 4px; line-height: 1.5; }
 
     /* ===== 底部 ===== */
     .footer {
       text-align: center;
-      padding: 40px 20px 50px;
+      padding: 48px 20px 60px;
       border-top: 1px solid rgba(255,215,0,0.06);
     }
     .footer p {
@@ -303,10 +252,14 @@
       letter-spacing: 1px;
     }
     .footer-flag {
-      font-size: 70px;
+      font-size: 80px;
       line-height: 1;
-      margin-top: 20px;
-      opacity: 0.85;
+      margin-top: 18px;
+      animation: flagPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes flagPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
     }
 
     /* ===== Confetti ===== */
@@ -328,16 +281,18 @@
     }
 
     /* ===== 响应式 ===== */
+    @media (max-width: 768px) {
+      .sponsor-grid { grid-template-columns: repeat(3, 1fr); }
+      .element-grid { grid-template-columns: repeat(2, 1fr); }
+    }
     @media (max-width: 600px) {
-      .hero { padding: 40px 16px 36px; }
-      .hero-flag { font-size: 60px; }
-      .hero-title { font-size: 26px; }
-      .cheer-card { padding: 28px 16px 24px; }
       .cheer-count-number { font-size: 48px; }
       .cheer-btn { padding: 14px 40px; font-size: 18px; }
-      .category-grid { grid-template-columns: 1fr; }
       .nav { flex-direction: column; gap: 8px; }
-      .footer-flag { font-size: 50px; }
+      .sponsor-grid { grid-template-columns: repeat(2, 1fr); }
+      .element-grid { grid-template-columns: 1fr; }
+      .sponsor-card { padding: 18px 12px; }
+      .footer-flag { font-size: 60px; }
     }
   </style>
 </head>
@@ -355,163 +310,140 @@
     </div>
   </nav>
 
-  <!-- ===== Hero 区域 ===== -->
-  <section class="hero">
-    <div class="hero-flag">🇨🇳</div>
-    <h1 class="hero-title">
-      为中国队加油！
-      <small>2026 美加墨世界杯 · 中国力量闪耀世界</small>
-    </h1>
-    <p class="hero-sub">已有 <span id="heroCount">2,569</span> 位球迷在这里送上祝福</p>
-  </section>
+  <!-- ===== 1. 加油按钮（最上方，无红旗） ===== -->
+  <section class="cheer-section">
+    <div class="cheer-count-number" id="countDisplay">2,569</div>
+    <div class="cheer-count-unit">人次为中国队加油</div>
+    <button class="cheer-btn" id="cheerBtn">
+      <span class="flag-icon">🇨🇳</span>
+      加油助威
+    </button>
+    <div class="cheer-note">点击按钮 · 送上你的支持</div>
 
-  <!-- ===== 加油面板 ===== -->
-  <section class="cheer-panel">
-    <div class="cheer-card">
-      <div class="label">⚡ 全民助威</div>
-      <div class="cheer-count-number" id="countDisplay">2,569</div>
-      <div class="cheer-count-unit">人次为中国队加油</div>
-      <button class="cheer-btn" id="cheerBtn">
-        <span class="flag-icon">🇨🇳</span>
-        加油助威
-      </button>
-      <div style="margin-top:12px;font-size:12px;color:#666;">点击按钮 · 送出你的支持</div>
-    </div>
-  </section>
-
-  <!-- ===== 助威排行榜 ===== -->
-  <section class="rank-section">
-    <div class="rank-card">
-      <h3>🏅 助威英雄榜 <span>Top 5</span></h3>
-      <div class="rank-list" id="rankList">
-        <div class="rank-item">
-          <div class="rank-num gold">1</div>
-          <div class="rank-name">🔥 北京老球迷</div>
-          <div class="rank-score">1,284 次</div>
-        </div>
-        <div class="rank-item">
-          <div class="rank-num silver">2</div>
-          <div class="rank-name">⚡ 广州小旋风</div>
-          <div class="rank-score">967 次</div>
-        </div>
-        <div class="rank-item">
-          <div class="rank-num bronze">3</div>
-          <div class="rank-name">🐉 龙的传人</div>
-          <div class="rank-score">835 次</div>
-        </div>
-        <div class="rank-item">
-          <div class="rank-num normal">4</div>
-          <div class="rank-name">🏮 成都火锅球迷</div>
-          <div class="rank-score">612 次</div>
-        </div>
-        <div class="rank-item">
-          <div class="rank-num normal">5</div>
-          <div class="rank-name">🌟 上海之光</div>
-          <div class="rank-score">448 次</div>
+    <!-- 排行榜 -->
+    <div class="rank-section">
+      <div class="rank-card">
+        <h3>🏅 助威英雄榜 <span>Top 5</span></h3>
+        <div class="rank-list" id="rankList">
+          <div class="rank-item">
+            <div class="rank-num gold">1</div>
+            <div class="rank-name">🔥 北京老球迷</div>
+            <div class="rank-score">1,284 次</div>
+          </div>
+          <div class="rank-item">
+            <div class="rank-num silver">2</div>
+            <div class="rank-name">⚡ 广州小旋风</div>
+            <div class="rank-score">967 次</div>
+          </div>
+          <div class="rank-item">
+            <div class="rank-num bronze">3</div>
+            <div class="rank-name">🐉 龙的传人</div>
+            <div class="rank-score">835 次</div>
+          </div>
+          <div class="rank-item">
+            <div class="rank-num normal">4</div>
+            <div class="rank-name">🏮 成都火锅球迷</div>
+            <div class="rank-score">612 次</div>
+          </div>
+          <div class="rank-item">
+            <div class="rank-num normal">5</div>
+            <div class="rank-name">🌟 上海之光</div>
+            <div class="rank-score">448 次</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== 中国力量 ===== -->
+  <!-- ===== 2. 世界杯里的中国印记 ===== -->
   <section class="china-section">
-    <h2 class="section-title"><span class="cn">🏮 世界杯里的中国力量</span></h2>
-    <p class="section-sub">从赞助商到转播、从制造到科技，中国元素无处不在</p>
+    <h2 class="section-title">🏮 世界杯里的中国印记</h2>
+    <p class="section-sub">2026 美加墨世界杯 · 中国力量闪耀世界</p>
 
-    <div class="category-grid">
-      <div class="cat-card">
+    <div class="sponsor-grid">
+      <div class="sponsor-card">
         <div class="icon">📺</div>
-        <div class="name">海信 Hisense</div>
-        <div class="desc">连续两届世界杯官方赞助商 · FIFA 官方赞助商</div>
+        <div class="name">海信</div>
+        <div class="desc">Hisense · 连续两届世界杯官方赞助商</div>
         <span class="badge">FIFA 官方赞助商</span>
       </div>
-      <div class="cat-card">
+      <div class="sponsor-card">
         <div class="icon">🚗</div>
-        <div class="name">比亚迪 BYD</div>
-        <div class="desc">2026 世界杯官方新能源汽车合作伙伴</div>
+        <div class="name">比亚迪</div>
+        <div class="desc">BYD · 官方新能源汽车合作伙伴</div>
         <span class="badge">官方合作伙伴</span>
       </div>
-      <div class="cat-card">
+      <div class="sponsor-card">
         <div class="icon">🥛</div>
-        <div class="name">蒙牛 Mengniu</div>
-        <div class="desc">世界杯全球官方赞助商</div>
+        <div class="name">蒙牛</div>
+        <div class="desc">Mengniu · 世界杯全球官方赞助商</div>
         <span class="badge">FIFA 官方赞助商</span>
       </div>
-      <div class="cat-card">
+      <div class="sponsor-card">
         <div class="icon">📱</div>
         <div class="name">vivo</div>
         <div class="desc">世界杯官方手机合作伙伴</div>
         <span class="badge">官方合作伙伴</span>
       </div>
-      <div class="cat-card">
+      <div class="sponsor-card">
         <div class="icon">🏗️</div>
-        <div class="name">万达 Wanda</div>
-        <div class="desc">FIFA 顶级合作伙伴</div>
+        <div class="name">万达</div>
+        <div class="desc">Wanda · FIFA 顶级合作伙伴</div>
         <span class="badge">FIFA 合作伙伴</span>
       </div>
-      <div class="cat-card">
+    </div>
+
+    <!-- ===== 3. 更多中国元素 ===== -->
+    <h3 class="more-title">🎯 更多中国元素</h3>
+    <div class="element-grid">
+      <div class="element-card">
         <div class="icon">📡</div>
         <div class="name">央视 / 咪咕</div>
-        <div class="desc">2026 世界杯独家转播权 · 覆盖全国数亿观众</div>
-        <span class="badge">独家转播</span>
+        <div class="desc">获得 2026 世界杯独家转播权，覆盖全国数亿观众。</div>
       </div>
-      <div class="cat-card">
-        <div class="icon">🧧</div>
-        <div class="name">支付宝 Alipay</div>
-        <div class="desc">官方数字支付合作伙伴 · 方便全球球迷</div>
-        <span class="badge">官方合作伙伴</span>
-      </div>
-      <div class="cat-card">
+      <div class="element-card">
         <div class="icon">🤖</div>
         <div class="name">宇树科技</div>
-        <div class="desc">智能机器人亮相世界杯赛场 · 引导与互动服务</div>
-        <span class="badge">科技赋能</span>
+        <div class="desc">智能机器人将亮相 2026 世界杯赛场，提供引导与互动服务。</div>
       </div>
-      <div class="cat-card">
+      <div class="element-card">
+        <div class="icon">🧧</div>
+        <div class="name">支付宝</div>
+        <div class="desc">Alipay 成为 2026 世界杯官方数字支付合作伙伴。</div>
+      </div>
+      <div class="element-card">
         <div class="icon">🏟️</div>
         <div class="name">中国制造</div>
-        <div class="desc">LED 显示屏、座椅、空调等由中国企业供应</div>
-        <span class="badge">制造强国</span>
+        <div class="desc">多座场馆的 LED 显示屏、座椅、空调等由中国企业供应。</div>
       </div>
-      <div class="cat-card">
+      <div class="element-card">
         <div class="icon">🪁</div>
         <div class="name">义乌制造</div>
-        <div class="desc">旗帜、助威棒、球迷服饰等纪念品大部分来自义乌</div>
-        <span class="badge">世界工厂</span>
+        <div class="desc">旗帜、助威棒、球迷服饰等周边占纪念品大部分份额。</div>
       </div>
-      <div class="cat-card">
+      <div class="element-card">
         <div class="icon">🎮</div>
-        <div class="name">腾讯 Tencent</div>
-        <div class="desc">数字媒体版权 · 赛事直播、集锦与互动</div>
-        <span class="badge">数字平台</span>
-      </div>
-      <div class="cat-card">
-        <div class="icon">💚</div>
-        <div class="name">更多中国企业</div>
-        <div class="desc">中国品牌正以前所未有的深度参与世界杯</div>
-        <span class="badge">中国力量</span>
+        <div class="name">腾讯</div>
+        <div class="desc">获得 2026 世界杯数字媒体版权，提供直播与互动。</div>
       </div>
     </div>
   </section>
 
-  <!-- ===== 底部寄语 ===== -->
+  <!-- ===== 4. 底部寄语 + 国旗 ===== -->
   <footer class="footer">
     <p>🇨🇳<br>期待有一天，中国国足球能真正站上世界杯的舞台！</p>
     <div class="footer-flag">🇨🇳</div>
   </footer>
 
-  <!-- ===== Confetti 容器 ===== -->
+  <!-- ===== Confetti ===== -->
   <div class="confetti-container" id="confettiContainer"></div>
 
   <script>
-    // 加油计数
     let count = 2569;
     const countDisplay = document.getElementById('countDisplay');
-    const heroCount = document.getElementById('heroCount');
     const cheerBtn = document.getElementById('cheerBtn');
     const confettiContainer = document.getElementById('confettiContainer');
 
-    // 更新排行榜
     const rankNames = ['🔥 北京老球迷', '⚡ 广州小旋风', '🐉 龙的传人', '🏮 成都火锅球迷', '🌟 上海之光'];
     const rankScores = [1284, 967, 835, 612, 448];
 
@@ -526,18 +458,14 @@
     cheerBtn.addEventListener('click', () => {
       count++;
       countDisplay.textContent = count.toLocaleString();
-      heroCount.textContent = count.toLocaleString();
-      
-      // 随机给一个排行榜用户加次数
       const idx = Math.floor(Math.random() * rankScores.length);
       rankScores[idx] += Math.floor(Math.random() * 2) + 1;
       updateRanks();
-      
       launchConfetti();
     });
 
     function launchConfetti() {
-      const colors = ['#de2910', '#ffd700', '#ffffff', '#ff6b35', '#ffdd00', '#e74c3c'];
+      const colors = ['#de2910', '#ffd700', '#ffffff', '#ff6b35', '#ffdd00'];
       for (let i = 0; i < 80; i++) {
         const piece = document.createElement('div');
         piece.className = 'confetti-piece';
@@ -553,7 +481,6 @@
       }
     }
 
-    // 导航高亮
     document.querySelectorAll('.nav-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         document.querySelector('.nav-tab.active')?.classList.remove('active');
