@@ -513,6 +513,103 @@ body {
 
 /* ========== Chart.js 微调 ========== */
 .wc-chart { border-radius:10px; padding:8px; background:var(--bg2); }
+
+/* ========== 为中国加油 ========== */
+.cheer-container { max-width:680px; margin:0 auto; padding:16px; }
+.cheer-header { text-align:center; margin-bottom:20px; }
+.cheer-flag-icon { font-size:3rem; margin-bottom:8px; }
+.cheer-header h2 { font-size:1.3rem; font-weight:800; color:var(--text0); margin:0 0 4px; }
+.cheer-subtitle { font-size:0.78rem; color:var(--text-muted); margin:0; }
+
+.sponsors-grid { display:grid; grid-template-columns:1fr; gap:10px; margin-bottom:20px; }
+@media(min-width:500px){ .sponsors-grid { grid-template-columns:1fr 1fr; } }
+.sponsor-card {
+  display:flex; gap:10px; align-items:flex-start;
+  background:var(--bg1); border:1px solid var(--border-1);
+  border-radius:10px; padding:12px;
+  transition:transform 0.2s, box-shadow 0.2s;
+}
+.sponsor-card:hover {
+  transform:translateY(-2px);
+  box-shadow:var(--shadow-md);
+}
+.sponsor-icon { font-size:1.5rem; line-height:1; flex-shrink:0; }
+.sponsor-info h4 { font-size:0.82rem; font-weight:700; color:var(--text0); margin:0 0 2px; }
+.sponsor-info p { font-size:0.72rem; color:var(--text-muted); margin:0; line-height:1.4; }
+
+.cheer-quote {
+  text-align:center; font-size:0.82rem; color:var(--text2);
+  background:var(--gold-soft); border:1px solid var(--gold);
+  border-radius:12px; padding:16px 20px; margin-bottom:24px;
+  line-height:1.6;
+}
+.cheer-quote .fa-quote-left,
+.cheer-quote .fa-quote-right { color:var(--gold); font-size:0.8rem; opacity:0.6; }
+.cheer-quote strong { color:var(--accent-3); }
+
+.cheer-btn-wrapper { text-align:center; margin-bottom:16px; }
+.cheer-btn {
+  width:130px; height:130px; border-radius:50%;
+  border:4px solid var(--gold);
+  background:linear-gradient(135deg, #de2910 0%, #ff4d3a 40%, #ffee00 50%, #ffee00 100%);
+  cursor:pointer;
+  display:inline-flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:2px;
+  transition:transform 0.3s, box-shadow 0.3s;
+  box-shadow:0 4px 20px rgba(222,41,16,0.3);
+  position:relative;
+  overflow:hidden;
+}
+.cheer-btn::after {
+  content:'';
+  position:absolute; inset:0; border-radius:50%;
+  background:linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.3) 60%, transparent 70%);
+  pointer-events:none;
+}
+.cheer-btn:hover {
+  transform:scale(1.08);
+  box-shadow:0 6px 30px rgba(222,41,16,0.5);
+}
+.cheer-btn:active { transform:scale(0.95); }
+.cheer-btn-big {
+  font-size:1.8rem; font-weight:900;
+  color:#fff;
+  text-shadow:1px 1px 3px rgba(0,0,0,0.3);
+  line-height:1;
+  position:relative; z-index:1;
+}
+.cheer-btn-small {
+  font-size:0.75rem; font-weight:700;
+  color:#8b0000;
+  line-height:1;
+  position:relative; z-index:1;
+}
+.cheer-hint { font-size:0.7rem; color:var(--text-muted); margin-top:10px; }
+
+/* 弹幕 */
+.danmaku-container {
+  position:fixed; top:0; left:0; right:0; bottom:0;
+  pointer-events:none; z-index:9999;
+  overflow:hidden;
+}
+.danmaku-item {
+  position:absolute;
+  white-space:nowrap;
+  font-size:1.2rem; font-weight:700;
+  color:#fff;
+  text-shadow:2px 2px 4px rgba(0,0,0,0.5), -1px -1px 2px rgba(0,0,0,0.3);
+  animation:danmakuFly 5s linear forwards;
+  opacity:0;
+}
+.danmaku-item:nth-child(odd) { font-size:1.4rem; }
+.danmaku-item:nth-child(3n) { font-size:1rem; animation-duration:6s; }
+.danmaku-item:nth-child(4n) { animation-duration:4s; }
+@keyframes danmakuFly {
+  0%   { transform:translateX(100vw); opacity:0; }
+  8%   { opacity:1; }
+  85%  { opacity:1; }
+  100% { transform:translateX(-100%); opacity:0; }
+}
 </style>
 </head>
 <body>
@@ -563,6 +660,7 @@ body {
           <button data-tab="champion" onclick="switchTab('champion')">🏆 冠军预测</button>
           <button data-tab="match"    onclick="switchTab('match')">⚽ 胜负分析</button>
           <button data-tab="score"    onclick="switchTab('score')">📊 比分预测</button>
+          <button data-tab="cheer"   onclick="switchTab('cheer')">🇨🇳 为中国加油</button>
         </div>
       </div>
     </div>
@@ -781,6 +879,95 @@ body {
     </div>
   </div>
 </div>
+
+<!-- ═══ 为中国加油 ═══ -->
+<section id="tab-cheer" class="hidden fade-in">
+  <div class="cheer-container">
+    <div class="cheer-header">
+      <div class="cheer-flag-icon">🇨🇳</div>
+      <h2>为中国加油</h2>
+      <p class="cheer-subtitle">虽然中国队没去世界杯，但中国元素无处不在！</p>
+    </div>
+
+    <!-- 赞助商列表 -->
+    <div class="sponsors-grid">
+      <div class="sponsor-card">
+        <div class="sponsor-icon">📺</div>
+        <div class="sponsor-info">
+          <h4>海信</h4>
+          <p>连续三届世界杯官方赞助商，用中国科技点亮赛场大屏</p>
+        </div>
+      </div>
+      <div class="sponsor-card">
+        <div class="sponsor-icon">🚗</div>
+        <div class="sponsor-info">
+          <h4>比亚迪</h4>
+          <p>取代大众成为2026世界杯官方汽车赞助商，中国新能源车驶入世界杯</p>
+        </div>
+      </div>
+      <div class="sponsor-card">
+        <div class="sponsor-icon">🥛</div>
+        <div class="sponsor-info">
+          <h4>蒙牛</h4>
+          <p>世界杯全球官方乳制品，中国营养助力世界足球</p>
+        </div>
+      </div>
+      <div class="sponsor-card">
+        <div class="sponsor-icon">📱</div>
+        <div class="sponsor-info">
+          <h4>vivo</h4>
+          <p>连续多届世界杯官方手机赞助商，中国影像记录精彩瞬间</p>
+        </div>
+      </div>
+      <div class="sponsor-card">
+        <div class="sponsor-icon">🏬</div>
+        <div class="sponsor-info">
+          <h4>万达集团</h4>
+          <p>FIFA顶级合作伙伴，中国地产巨头闪耀世界舞台</p>
+        </div>
+      </div>
+      <div class="sponsor-card">
+        <div class="sponsor-icon">🔋</div>
+        <div class="sponsor-info">
+          <h4>雅迪</h4>
+          <p>2026世界杯官方电动两轮车赞助商，中国智造绿色出行</p>
+        </div>
+      </div>
+      <div class="sponsor-card">
+        <div class="sponsor-icon">💰</div>
+        <div class="sponsor-info">
+          <h4>蚂蚁集团/支付宝</h4>
+          <p>FIFA官方支付合作伙伴，中国移动支付走向世界</p>
+        </div>
+      </div>
+      <div class="sponsor-card">
+        <div class="sponsor-icon">🀄</div>
+        <div class="sponsor-info">
+          <h4>更多中国元素</h4>
+          <p>吉祥物、纪念品、旗帜……全是中国制造！除了足球队，都去了 🇨🇳</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cheer-quote">
+      <i class="fas fa-quote-left"></i>
+      网友们常说：<strong>中国除了足球队没去，其他的都去了！</strong> 期待有一天，中国足球能真正站上世界杯的舞台！
+      <i class="fas fa-quote-right"></i>
+    </div>
+
+    <!-- 圆形加油按钮 -->
+    <div class="cheer-btn-wrapper" id="cheerBtnWrapper">
+      <button class="cheer-btn" id="cheerBtn" onclick="triggerDanmaku()">
+        <span class="cheer-btn-big">加油</span>
+        <span class="cheer-btn-small">中国队</span>
+      </button>
+      <p class="cheer-hint">点击为中国队加油 💪</p>
+    </div>
+  </div>
+
+  <!-- 弹幕容器 -->
+  <div class="danmaku-container" id="danmakuContainer"></div>
+</section>
 
 </main>
 
@@ -1066,7 +1253,7 @@ function switchTab(tab) {
   // 关闭所有下拉
   document.querySelectorAll('.dropdown-menu').forEach(d => d.classList.remove('show'));
   // 隐藏所有 tab
-  ['dashboard','live','groups','knockout','champion','match','score'].forEach(t => {
+  ['dashboard','live','groups','knockout','champion','match','score','cheer'].forEach(t => {
     const e = document.getElementById('tab-' + t);
     if (e) e.classList.add('hidden');
   });
@@ -1079,7 +1266,7 @@ function switchTab(tab) {
   let matched = document.querySelector('.nav-btn[data-tab="' + tab + '"]');
   if (!matched) {
     // fallback: 如果是子 tab，尝试高亮父级 dropdown-btn
-    const parentMap = { 'live':'live', 'groups':'groups', 'knockout':'knockout', 'champion':'champion', 'match':'match', 'score':'score' };
+    const parentMap = { 'live':'live', 'groups':'groups', 'knockout':'knockout', 'champion':'champion', 'match':'match', 'score':'score', 'cheer':'champion' };
     const parentKey = parentMap[tab] || tab;
     matched = document.querySelector('.nav-btn[data-tab="' + parentKey + '"]');
   }
@@ -1342,6 +1529,61 @@ function populateTeamSelects() {
     const sel = document.getElementById(id);
     sel.innerHTML = '<option value="">选择球队</option>' + teamNames.map(n => '<option value="' + n + '">' + teams[n].flag + ' ' + n + '</option>').join('');
   });
+}
+
+// ==================== 为中国加油 · 弹幕 ====================
+const cheerMessages = [
+  '中国队加油 🇨🇳',
+  '祝中国队早日进入世界杯！⚽',
+  '中国队 未来可期 💪',
+  '下届世界杯 中国队见！',
+  '中国足球 永不言弃 🔥',
+  '冲冲冲！中国队 🇨🇳',
+  '中国梦 足球梦 🌟',
+  '中国加油！世界加油！',
+  '🇨🇳🇨🇳🇨🇳 中国队雄起',
+  '总有一天 中国足球会站上世界杯舞台 ⭐',
+  '中国红 燃爆世界杯 🔴',
+  '为梦想加油 为中国队加油',
+  '不止是足球 更是中国精神 💪',
+  '2026没有你 2030一定见！',
+  '🇨🇳 中国力量 闪耀世界',
+];
+let danmakuTimer = null;
+
+function triggerDanmaku() {
+  // 清空上一次
+  if (danmakuTimer) clearTimeout(danmakuTimer);
+  const container = document.getElementById('danmakuContainer');
+  container.innerHTML = '';
+  // 弹幕数量（8-12条随机）
+  const count = 8 + Math.floor(Math.random() * 5);
+  const colors = ['#ff6b6b','#ffd93d','#6bcb77','#4d96ff','#ff8a5c','#ff6bcb','#fff'];
+  for (let i = 0; i < count; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'danmaku-item';
+      el.textContent = cheerMessages[Math.floor(Math.random() * cheerMessages.length)];
+      el.style.color = colors[Math.floor(Math.random() * colors.length)];
+      // 随机垂直位置
+      el.style.top = (5 + Math.random() * 75) + '%';
+      // 随机延迟
+      el.style.animationDelay = (Math.random() * 2) + 's';
+      container.appendChild(el);
+      // 动画结束后清除
+      setTimeout(() => el.remove(), 7000);
+    }, i * 200);
+  }
+  // 点击按钮小动画
+  const btn = document.getElementById('cheerBtn');
+  if (btn) {
+    btn.style.transform = 'scale(0.9)';
+    setTimeout(() => { btn.style.transform = ''; }, 200);
+  }
+  // 提示语闪烁
+  const hint = document.querySelector('.cheer-hint');
+  if (hint) { hint.textContent = '🇨🇳 中国队加油！🇨🇳';
+    setTimeout(() => { hint.textContent = '点击为中国队加油 💪'; }, 2000); }
 }
 
 // ==================== 启动 ====================

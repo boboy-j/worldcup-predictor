@@ -1,7 +1,0 @@
-fix: 使用 node-fetch 兜底 API 请求，添加详细错误日志
-
-- 引入 node-fetch 包作为原生 fetch 的 fallback
-- 打印真实错误信息（不再只静默吞掉）
-- 解决 Railway 上 API 返回空数据的问题
-
-Co-Authored-By: AtomCode (deepseek-v4-flash) <noreply@atomgit.com>
