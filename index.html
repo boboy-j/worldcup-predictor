@@ -1567,7 +1567,9 @@ function renderSchedule(matches) {
     if (time) {
       const d = new Date(time);
       if (!isNaN(d.getTime())) {
-        dateKey = d.toISOString().slice(0, 10);
+        dateKey = d.getFullYear() + '-' +
+          ('0' + (d.getMonth() + 1)).slice(-2) + '-' +
+          ('0' + d.getDate()).slice(-2);
         sortKey = d.getTime();
       }
     }
