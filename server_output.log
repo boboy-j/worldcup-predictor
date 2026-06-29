@@ -1,0 +1,135 @@
+🚀 === 2026 世界杯实时数据服务 (真实) ===
+📡 WS: ws://localhost:3000
+📡 HTTP: http://localhost:3001
+🔑 API Key: 已配置
+[启动] 正在从 football-data.org 拉取数据...
+[API] 请求比赛数据...
+📡 HTTP API: http://localhost:3001
+[API] ✅ 获取到 104 场比赛 (已打40场)
+[API] 请求积分榜...
+[API] ✅ 获取到 12 组积分榜
+[状态] 📊 40场已结束 | 0场进行中 | 64场未开始 | 阶段:knockout_final
+[启动] ✅ 成功加载 104 场比赛数据
+[启动] 📊 40 场已结束
+[启动] 🔴 0 场进行中
+[启动] 📅 64 场未开始
+🎯 === 服务就绪 ===
+   客户端打开 http://localhost:3001 查看API
+   WebSocket 连接 ws://localhost:3000
+(node:26908) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[API] 请求比赛数据...
+[API] 请求超时
+[API] 请求比赛数据...
+[API] 请求超时
+[API] 请求积分榜...
+[API] ✅ 获取到 12 组积分榜
+[API] 请求比赛数据...
+[API] ✅ 获取到 104 场比赛 (已打40场)
+[状态] 📊 40场已结束 | 0场进行中 | 64场未开始 | 阶段:knockout_final
+[API] 请求比赛数据...
+[API] ✅ 获取到 104 场比赛 (已打40场)
+[API] 请求积分榜...
+[API] ✅ 获取到 12 组积分榜
+[状态] 📊 40场已结束 | 0场进行中 | 64场未开始 | 阶段:knockout_final
+[API] 请求比赛数据...
+[API] 请求超时
+[API] 请求比赛数据...
+[API] ✅ 获取到 104 场比赛 (已打40场)
+[API] 请求积分榜...
+[API] ✅ 获取到 12 组积分榜
+[状态] 📊 40场已结束 | 0场进行中 | 64场未开始 | 阶段:knockout_final
+[API] 请求比赛数据...
+[API] ✅ 获取到 104 场比赛 (已打40场)
+[状态] 📊 40场已结束 | 0场进行中 | 64场未开始 | 阶段:knockout_final
+✅ 客户端连接: mqp6vj2r3c9lxz (总计: 1)
+📢 广播 (1): minute_update
+[API] 请求比赛数据...
+📢 广播 (1): heartbeat
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+[API] 请求超时
+[API] 请求积分榜...
+📢 广播 (1): minute_update
+[API] ✅ 获取到 12 组积分榜
+📢 广播 (1): status_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+[API] 请求比赛数据...
+📢 广播 (1): heartbeat
+📢 广播 (1): minute_update
+[API] ✅ 获取到 104 场比赛 (已打40场)
+[状态] 📊 40场已结束 | 0场进行中 | 64场未开始 | 阶段:knockout_final
+📢 广播 (1): status_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+[API] 请求比赛数据...
+📢 广播 (1): heartbeat
+📢 广播 (1): minute_update
+[API] ✅ 获取到 104 场比赛 (已打40场)
+[API] 请求积分榜...
+[API] ✅ 获取到 12 组积分榜
+[状态] 📊 40场已结束 | 0场进行中 | 64场未开始 | 阶段:knockout_final
+📢 广播 (1): status_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+[API] 请求比赛数据...
+📢 广播 (1): heartbeat
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+[API] 请求超时
+📢 广播 (1): status_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+[API] 请求比赛数据...
+📢 广播 (1): heartbeat
+📢 广播 (1): minute_update
+[API] ✅ 获取到 104 场比赛 (已打40场)
+[API] 请求积分榜...
+[API] ✅ 获取到 12 组积分榜
+[状态] 📊 40场已结束 | 0场进行中 | 64场未开始 | 阶段:knockout_final
+📢 广播 (1): status_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+[API] 请求比赛数据...
+📢 广播 (1): heartbeat
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+[API] 请求超时
+📢 广播 (1): status_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+[API] 请求比赛数据...
+📢 广播 (1): heartbeat
+📢 广播 (1): minute_update
+[API] ✅ 获取到 104 场比赛 (已打40场)
+[API] 请求积分榜...
+[API] ✅ 获取到 12 组积分榜
+[状态] 📊 40场已结束 | 0场进行中 | 64场未开始 | 阶段:knockout_final
+📢 广播 (1): status_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+[API] 请求比赛数据...
+📢 广播 (1): heartbeat
+📢 广播 (1): minute_update
+📢 广播 (1): minute_update
+[API] 请求超时
+📢 广播 (1): status_update
+📢 广播 (1): minute_update
