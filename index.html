@@ -1541,7 +1541,13 @@ function renderSchedule(matches) {
 
   // 尝试取比赛时间（兼容多种字段名）
   function getMatchTime(m) {
-    return m.date || m.datetime || m.utcDate || m.kickOff || m.time || m.timestamp || null;
+    // 优先取完整时间字符串
+    if (m.utcDate) return m.utcDate;
+    if (m.datetime) return m.datetime;
+    if (m.kickOff) return m.kickOff;
+    // 否则合并 date + time
+    if (m.date && m.time) return m.date + 'T' + m.time + ':00';
+    return m.date || m.time || m.timestamp || null;
   }
 
   // 阶段排序权重

@@ -195,6 +195,7 @@ function parseApiMatchesToInternal(apiData) {
       awayCrest: apiMatch.awayTeam?.crest || '',
       date: apiMatch.utcDate ? apiMatch.utcDate.substring(0, 10) : '',
       time: apiMatch.utcDate ? apiMatch.utcDate.substring(11, 16) : '',
+      utcDate: apiMatch.utcDate || null,
       score: {
         home: homeGoals,
         away: awayGoals
