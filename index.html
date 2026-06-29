@@ -803,6 +803,11 @@ body {
 <div id="tab-schedule" class="hidden fade-in">
   <div class="card p-4">
     <h2 class="text-sm font-bold mb-4">📅 2026 全部赛程</h2>
+    <div class="grid grid-cols-3 gap-3 mb-4">
+      <div class="card stat-card"><div class="num" id="sched-total" style="font-size:1.4rem">-</div><div class="lbl" style="font-size:0.7rem">总场次</div></div>
+      <div class="card stat-card"><div class="num" id="sched-finished" style="font-size:1.4rem">-</div><div class="lbl" style="font-size:0.7rem">已结束</div></div>
+      <div class="card stat-card"><div class="num" id="sched-upcoming" style="font-size:1.4rem">-</div><div class="lbl" style="font-size:0.7rem">未开始</div></div>
+    </div>
     <div id="schedule-list"></div>
   </div>
 </div>
@@ -1526,31 +1531,79 @@ function renderSchedule(matches) {
     el.innerHTML = '<div class="empty-state"><i class="fas fa-spinner fa-spin"></i><p>加载中...</p></div>';
     return;
   }
-  // 按 stage 分组，仅保留小组赛
-  const groups = {};
-  src.forEach(m => {
-    if (m.stage && !m.stage.includes('GROUP')) return; // 跳过淘汰赛
-    const key = m.stage || 'UNKNOWN';
-    if (!groups[key]) groups[key] = [];
-    groups[key].push(m);
+  // 更新统计
+  const total = src.length;
+  const finished = src.filter(m => m.status === 'FT').length;
+  const upcoming = total - finished - src.filter(m => m.status === 'LIVE').length;
+  document.getElementById('sched-total').textContent = total;
+  document.getElementById('sched-finished').textContent = finished;
+  document.getElementById('sched-upcoming').textContent = upcoming;
+
+  // 尝试取比赛时间（兼容多种字段名）
+  function getMatchTime(m) {
+    return m.date || m.datetime || m.utcDate || m.kickOff || m.time || m.timestamp || null;
+  }
+
+  // 阶段排序权重
+  const stageOrder = {};
+  'GROUP_A,GROUP_B,GROUP_C,GROUP_D,GROUP_E,GROUP_F,GROUP_G,GROUP_H,GROUP_I,GROUP_J,GROUP_K,GROUP_L,ROUND_16,LAST_16,QUARTER_FINALS,SEMI_FINALS,THIRD_PLACE,FINAL'
+    .split(',').forEach((s, i) => stageOrder[s] = i);
+
+  function stageRank(stage) {
+    return stageOrder[stage] !== undefined ? stageOrder[stage] : 999;
+  }
+
+  const items = src.map(m => {
+    const time = getMatchTime(m);
+    // 统一成 YYYY-MM-DD 日期用于分组
+    let dateKey = '';
+    let sortKey = '';
+    if (time) {
+      const d = new Date(time);
+      if (!isNaN(d.getTime())) {
+        dateKey = d.toISOString().slice(0, 10);
+        sortKey = d.getTime();
+      }
+    }
+    if (!sortKey) {
+      sortKey = stageRank(m.stage) * 10000 + (m.matchIndex || 0);
+    }
+    return { match: m, time, dateKey, sortKey };
   });
-  // 小组赛直接按字母排序
-  const sortedKeys = Object.keys(groups).sort((a, b) => a.localeCompare(b));
-  el.innerHTML = sortedKeys.map(key => {
-    const label = '📋 ' + key.replace(/_/g, ' ');
-    const ms = groups[key];
-    return '<div class="schedule-stage-title">' + label + ' <span style="color:var(--text-muted);font-weight:400;font-size:0.75rem">(' + ms.length + '场)</span></div>' +
-      ms.map(m => {
-        const ht = teams[m.home] || { flag: '' }, at = teams[m.away] || { flag: '' };
-        const hg = typeof m.score === 'object' ? (m.score.home != null ? m.score.home : '-') : '-';
-        const ag = typeof m.score === 'object' ? (m.score.away != null ? m.score.away : '-') : '-';
-        const isFT = m.status === 'FT', isLive = m.status === 'LIVE';
-        let statusTag, scoreDisplay;
-        if (isFT) { statusTag = '<span class="status-tag ft">✅ 已结束</span>'; scoreDisplay = '<span class="font-bold" style="color:var(--green-fg)">' + hg + '</span><span class="mx-1" style="color:var(--text-muted)">:</span><span class="font-bold" style="color:var(--green-fg)">' + ag + '</span>'; }
-        else if (isLive) { statusTag = '<span class="status-tag live">🔴 进行中 ' + (m.minute || '') + '\'</span>'; scoreDisplay = '<span class="font-bold" style="color:var(--red-fg)">' + hg + '</span><span class="mx-1" style="color:var(--text-muted)">:</span><span class="font-bold" style="color:var(--red-fg)">' + ag + '</span>'; }
-        else { statusTag = '<span class="status-tag scheduled">⏳ 未开赛</span>'; scoreDisplay = '<span style="color:var(--text-muted)">- : -</span>'; }
-        return '<div class="schedule-item"><div class="teams"><span style="font-size:1.3rem">' + ht.flag + '</span><span class="team-name">' + m.home + '</span></div><div class="vs-score">' + scoreDisplay + '</div><div class="teams" style="justify-content:flex-end"><span class="team-name">' + m.away + '</span><span style="font-size:1.3rem">' + at.flag + '</span></div>' + statusTag + '</div>';
-      }).join('');
+
+  // 排序
+  items.sort((a, b) => a.sortKey - b.sortKey);
+
+  // 分组渲染
+  el.innerHTML = items.map(item => {
+    const m = item.match;
+    const ht = teams[m.home] || { flag: '' }, at = teams[m.away] || { flag: '' };
+    const hg = typeof m.score === 'object' ? (m.score.home != null ? m.score.home : '-') : '-';
+    const ag = typeof m.score === 'object' ? (m.score.away != null ? m.score.away : '-') : '-';
+    const isFT = m.status === 'FT', isLive = m.status === 'LIVE';
+    let statusTag, scoreDisplay;
+    if (isFT) { statusTag = '<span class="status-tag ft">✅ 已结束</span>'; scoreDisplay = '<span class="font-bold" style="color:var(--green-fg)">' + hg + '</span><span class="mx-1" style="color:var(--text-muted)">:</span><span class="font-bold" style="color:var(--green-fg)">' + ag + '</span>'; }
+    else if (isLive) { statusTag = '<span class="status-tag live">🔴 进行中 ' + (m.minute || '') + '\'</span>'; scoreDisplay = '<span class="font-bold" style="color:var(--red-fg)">' + hg + '</span><span class="mx-1" style="color:var(--text-muted)">:</span><span class="font-bold" style="color:var(--red-fg)">' + ag + '</span>'; }
+    else { statusTag = '<span class="status-tag scheduled">⏳ 未开赛</span>'; scoreDisplay = '<span style="color:var(--text-muted)">- : -</span>'; }
+
+    let timeHtml = '';
+    if (item.time) {
+      const d = new Date(item.time);
+      if (!isNaN(d.getTime())) {
+        timeHtml = '<span style="font-size:0.65rem;color:var(--text-muted);margin-right:8px;white-space:nowrap">' +
+          ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2) + '</span>';
+      }
+    } else {
+      timeHtml = '<span style="font-size:0.65rem;color:var(--text-muted);margin-right:8px;white-space:nowrap">' +
+        (m.stage || '').replace(/_/g, ' ') + '</span>';
+    }
+
+    return '<div class="schedule-item" style="gap:4px">' +
+      timeHtml +
+      '<div class="teams"><span style="font-size:1.3rem">' + ht.flag + '</span><span class="team-name">' + m.home + '</span></div>' +
+      '<div class="vs-score">' + scoreDisplay + '</div>' +
+      '<div class="teams" style="justify-content:flex-end"><span class="team-name">' + m.away + '</span><span style="font-size:1.3rem">' + at.flag + '</span></div>' +
+      statusTag + '</div>';
   }).join('');
 }
 
