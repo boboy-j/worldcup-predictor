@@ -1448,6 +1448,7 @@ function renderGroups() { renderGroupsFromServer(calculateStandings()); }
 let currentKoRound = 0;
 const KO_ROUNDS = [
   { stage: 'LAST_16',        label: '1/16决赛', icon: '32' },
+  { stage: 'ROUND_16',       label: '1/8决赛',  icon: '16' },
   { stage: 'QUARTER_FINALS', label: '1/4决赛',  icon: '8' },
   { stage: 'SEMI_FINALS',    label: '半决赛',   icon: '4' },
   { stage: 'FINAL',          label: '决赛',     icon: '1' },
@@ -1461,7 +1462,7 @@ function renderKnockout(matches) {
   const koMap = {};
   (src || []).forEach(m => {
     if (m.stage && !m.stage.includes('GROUP') &&
-        ['LAST_16','QUARTER_FINALS','SEMI_FINALS','FINAL','THIRD_PLACE'].includes(m.stage)) {
+        ['LAST_16','ROUND_16','QUARTER_FINALS','SEMI_FINALS','FINAL','THIRD_PLACE'].includes(m.stage)) {
       if (!koMap[m.stage]) koMap[m.stage] = [];
       koMap[m.stage].push(m);
     }
@@ -1524,31 +1525,18 @@ function renderSchedule(matches) {
     el.innerHTML = '<div class="empty-state"><i class="fas fa-spinner fa-spin"></i><p>加载中...</p></div>';
     return;
   }
-  // 按 stage 分组
+  // 按 stage 分组，仅保留小组赛
   const groups = {};
   src.forEach(m => {
+    if (m.stage && !m.stage.includes('GROUP')) return; // 跳过淘汰赛
     const key = m.stage || 'UNKNOWN';
     if (!groups[key]) groups[key] = [];
     groups[key].push(m);
   });
-  const stageLabels = {
-    'LAST_16': '🏆 1/16决赛',
-    'QUARTER_FINALS': '🏆 1/4决赛',
-    'SEMI_FINALS': '🏆 半决赛',
-    'FINAL': '🏆 决赛',
-    'THIRD_PLACE': '🏆 季军赛'
-  };
-  // 排序：小组赛先按字母，淘汰赛按自定义顺序
-  const order = ['LAST_16','QUARTER_FINALS','SEMI_FINALS','THIRD_PLACE','FINAL'];
-  const sortedKeys = Object.keys(groups).sort((a, b) => {
-    const ia = order.indexOf(a), ib = order.indexOf(b);
-    if (ia !== -1 && ib !== -1) return ia - ib;
-    if (ia !== -1) return -1;
-    if (ib !== -1) return 1;
-    return a.localeCompare(b);
-  });
+  // 小组赛直接按字母排序
+  const sortedKeys = Object.keys(groups).sort((a, b) => a.localeCompare(b));
   el.innerHTML = sortedKeys.map(key => {
-    const label = stageLabels[key] || ('📋 ' + key.replace(/_/g, ' '));
+    const label = '📋 ' + key.replace(/_/g, ' ');
     const ms = groups[key];
     return '<div class="schedule-stage-title">' + label + ' <span style="color:var(--text-muted);font-weight:400;font-size:0.75rem">(' + ms.length + '场)</span></div>' +
       ms.map(m => {
