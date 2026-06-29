@@ -1,0 +1,1634 @@
+[
+  {
+    "id": "seed_ga_0",
+    "stage": "GROUP_A",
+    "group": "A",
+    "home": "Mexico",
+    "away": "South Korea",
+    "utcDate": "2026-06-11T10:00:00.000Z",
+    "date": "2026-06-11",
+    "time": "10:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ga_1",
+    "stage": "GROUP_A",
+    "group": "A",
+    "home": "South Africa",
+    "away": "Czechia",
+    "utcDate": "2026-06-11T14:00:00.000Z",
+    "date": "2026-06-11",
+    "time": "14:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ga_2",
+    "stage": "GROUP_A",
+    "group": "A",
+    "home": "Mexico",
+    "away": "South Africa",
+    "utcDate": "2026-06-11T18:00:00.000Z",
+    "date": "2026-06-11",
+    "time": "18:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ga_3",
+    "stage": "GROUP_A",
+    "group": "A",
+    "home": "South Korea",
+    "away": "Czechia",
+    "utcDate": "2026-06-11T22:00:00.000Z",
+    "date": "2026-06-11",
+    "time": "22:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ga_4",
+    "stage": "GROUP_A",
+    "group": "A",
+    "home": "Mexico",
+    "away": "Czechia",
+    "utcDate": "2026-06-12T02:00:00.000Z",
+    "date": "2026-06-12",
+    "time": "02:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ga_5",
+    "stage": "GROUP_A",
+    "group": "A",
+    "home": "South Korea",
+    "away": "South Africa",
+    "utcDate": "2026-06-12T06:00:00.000Z",
+    "date": "2026-06-12",
+    "time": "06:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gb_0",
+    "stage": "GROUP_B",
+    "group": "B",
+    "home": "Canada",
+    "away": "Switzerland",
+    "utcDate": "2026-06-12T10:00:00.000Z",
+    "date": "2026-06-12",
+    "time": "10:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gb_1",
+    "stage": "GROUP_B",
+    "group": "B",
+    "home": "Bosnia-Herzegovina",
+    "away": "Qatar",
+    "utcDate": "2026-06-12T14:00:00.000Z",
+    "date": "2026-06-12",
+    "time": "14:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gb_2",
+    "stage": "GROUP_B",
+    "group": "B",
+    "home": "Canada",
+    "away": "Bosnia-Herzegovina",
+    "utcDate": "2026-06-12T18:00:00.000Z",
+    "date": "2026-06-12",
+    "time": "18:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gb_3",
+    "stage": "GROUP_B",
+    "group": "B",
+    "home": "Switzerland",
+    "away": "Qatar",
+    "utcDate": "2026-06-12T22:00:00.000Z",
+    "date": "2026-06-12",
+    "time": "22:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gb_4",
+    "stage": "GROUP_B",
+    "group": "B",
+    "home": "Canada",
+    "away": "Qatar",
+    "utcDate": "2026-06-13T02:00:00.000Z",
+    "date": "2026-06-13",
+    "time": "02:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gb_5",
+    "stage": "GROUP_B",
+    "group": "B",
+    "home": "Switzerland",
+    "away": "Bosnia-Herzegovina",
+    "utcDate": "2026-06-13T06:00:00.000Z",
+    "date": "2026-06-13",
+    "time": "06:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gc_0",
+    "stage": "GROUP_C",
+    "group": "C",
+    "home": "Brazil",
+    "away": "Morocco",
+    "utcDate": "2026-06-13T10:00:00.000Z",
+    "date": "2026-06-13",
+    "time": "10:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gc_1",
+    "stage": "GROUP_C",
+    "group": "C",
+    "home": "Scotland",
+    "away": "Haiti",
+    "utcDate": "2026-06-13T14:00:00.000Z",
+    "date": "2026-06-13",
+    "time": "14:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gc_2",
+    "stage": "GROUP_C",
+    "group": "C",
+    "home": "Brazil",
+    "away": "Scotland",
+    "utcDate": "2026-06-13T18:00:00.000Z",
+    "date": "2026-06-13",
+    "time": "18:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gc_3",
+    "stage": "GROUP_C",
+    "group": "C",
+    "home": "Morocco",
+    "away": "Haiti",
+    "utcDate": "2026-06-13T22:00:00.000Z",
+    "date": "2026-06-13",
+    "time": "22:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gc_4",
+    "stage": "GROUP_C",
+    "group": "C",
+    "home": "Brazil",
+    "away": "Haiti",
+    "utcDate": "2026-06-14T02:00:00.000Z",
+    "date": "2026-06-14",
+    "time": "02:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gc_5",
+    "stage": "GROUP_C",
+    "group": "C",
+    "home": "Morocco",
+    "away": "Scotland",
+    "utcDate": "2026-06-14T06:00:00.000Z",
+    "date": "2026-06-14",
+    "time": "06:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gd_0",
+    "stage": "GROUP_D",
+    "group": "D",
+    "home": "USA",
+    "away": "Australia",
+    "utcDate": "2026-06-14T10:00:00.000Z",
+    "date": "2026-06-14",
+    "time": "10:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gd_1",
+    "stage": "GROUP_D",
+    "group": "D",
+    "home": "Paraguay",
+    "away": "Turkey",
+    "utcDate": "2026-06-14T14:00:00.000Z",
+    "date": "2026-06-14",
+    "time": "14:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gd_2",
+    "stage": "GROUP_D",
+    "group": "D",
+    "home": "USA",
+    "away": "Paraguay",
+    "utcDate": "2026-06-14T18:00:00.000Z",
+    "date": "2026-06-14",
+    "time": "18:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gd_3",
+    "stage": "GROUP_D",
+    "group": "D",
+    "home": "Australia",
+    "away": "Turkey",
+    "utcDate": "2026-06-14T22:00:00.000Z",
+    "date": "2026-06-14",
+    "time": "22:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gd_4",
+    "stage": "GROUP_D",
+    "group": "D",
+    "home": "USA",
+    "away": "Turkey",
+    "utcDate": "2026-06-15T02:00:00.000Z",
+    "date": "2026-06-15",
+    "time": "02:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gd_5",
+    "stage": "GROUP_D",
+    "group": "D",
+    "home": "Australia",
+    "away": "Paraguay",
+    "utcDate": "2026-06-15T06:00:00.000Z",
+    "date": "2026-06-15",
+    "time": "06:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ge_0",
+    "stage": "GROUP_E",
+    "group": "E",
+    "home": "Germany",
+    "away": "Ivory Coast",
+    "utcDate": "2026-06-15T10:00:00.000Z",
+    "date": "2026-06-15",
+    "time": "10:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ge_1",
+    "stage": "GROUP_E",
+    "group": "E",
+    "home": "Ecuador",
+    "away": "Curaçao",
+    "utcDate": "2026-06-15T14:00:00.000Z",
+    "date": "2026-06-15",
+    "time": "14:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ge_2",
+    "stage": "GROUP_E",
+    "group": "E",
+    "home": "Germany",
+    "away": "Ecuador",
+    "utcDate": "2026-06-15T18:00:00.000Z",
+    "date": "2026-06-15",
+    "time": "18:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ge_3",
+    "stage": "GROUP_E",
+    "group": "E",
+    "home": "Ivory Coast",
+    "away": "Curaçao",
+    "utcDate": "2026-06-15T22:00:00.000Z",
+    "date": "2026-06-15",
+    "time": "22:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ge_4",
+    "stage": "GROUP_E",
+    "group": "E",
+    "home": "Germany",
+    "away": "Curaçao",
+    "utcDate": "2026-06-16T02:00:00.000Z",
+    "date": "2026-06-16",
+    "time": "02:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ge_5",
+    "stage": "GROUP_E",
+    "group": "E",
+    "home": "Ivory Coast",
+    "away": "Ecuador",
+    "utcDate": "2026-06-16T06:00:00.000Z",
+    "date": "2026-06-16",
+    "time": "06:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gf_0",
+    "stage": "GROUP_F",
+    "group": "F",
+    "home": "Netherlands",
+    "away": "Japan",
+    "utcDate": "2026-06-16T10:00:00.000Z",
+    "date": "2026-06-16",
+    "time": "10:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gf_1",
+    "stage": "GROUP_F",
+    "group": "F",
+    "home": "Sweden",
+    "away": "Tunisia",
+    "utcDate": "2026-06-16T14:00:00.000Z",
+    "date": "2026-06-16",
+    "time": "14:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gf_2",
+    "stage": "GROUP_F",
+    "group": "F",
+    "home": "Netherlands",
+    "away": "Sweden",
+    "utcDate": "2026-06-16T18:00:00.000Z",
+    "date": "2026-06-16",
+    "time": "18:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gf_3",
+    "stage": "GROUP_F",
+    "group": "F",
+    "home": "Japan",
+    "away": "Tunisia",
+    "utcDate": "2026-06-16T22:00:00.000Z",
+    "date": "2026-06-16",
+    "time": "22:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gf_4",
+    "stage": "GROUP_F",
+    "group": "F",
+    "home": "Netherlands",
+    "away": "Tunisia",
+    "utcDate": "2026-06-17T02:00:00.000Z",
+    "date": "2026-06-17",
+    "time": "02:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gf_5",
+    "stage": "GROUP_F",
+    "group": "F",
+    "home": "Japan",
+    "away": "Sweden",
+    "utcDate": "2026-06-17T06:00:00.000Z",
+    "date": "2026-06-17",
+    "time": "06:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gg_0",
+    "stage": "GROUP_G",
+    "group": "G",
+    "home": "Belgium",
+    "away": "Egypt",
+    "utcDate": "2026-06-17T10:00:00.000Z",
+    "date": "2026-06-17",
+    "time": "10:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gg_1",
+    "stage": "GROUP_G",
+    "group": "G",
+    "home": "Iran",
+    "away": "New Zealand",
+    "utcDate": "2026-06-17T14:00:00.000Z",
+    "date": "2026-06-17",
+    "time": "14:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gg_2",
+    "stage": "GROUP_G",
+    "group": "G",
+    "home": "Belgium",
+    "away": "Iran",
+    "utcDate": "2026-06-17T18:00:00.000Z",
+    "date": "2026-06-17",
+    "time": "18:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gg_3",
+    "stage": "GROUP_G",
+    "group": "G",
+    "home": "Egypt",
+    "away": "New Zealand",
+    "utcDate": "2026-06-17T22:00:00.000Z",
+    "date": "2026-06-17",
+    "time": "22:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gg_4",
+    "stage": "GROUP_G",
+    "group": "G",
+    "home": "Belgium",
+    "away": "New Zealand",
+    "utcDate": "2026-06-18T02:00:00.000Z",
+    "date": "2026-06-18",
+    "time": "02:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gg_5",
+    "stage": "GROUP_G",
+    "group": "G",
+    "home": "Egypt",
+    "away": "Iran",
+    "utcDate": "2026-06-18T06:00:00.000Z",
+    "date": "2026-06-18",
+    "time": "06:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gh_0",
+    "stage": "GROUP_H",
+    "group": "H",
+    "home": "Spain",
+    "away": "Uruguay",
+    "utcDate": "2026-06-18T10:00:00.000Z",
+    "date": "2026-06-18",
+    "time": "10:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gh_1",
+    "stage": "GROUP_H",
+    "group": "H",
+    "home": "Saudi Arabia",
+    "away": "Cape Verde",
+    "utcDate": "2026-06-18T14:00:00.000Z",
+    "date": "2026-06-18",
+    "time": "14:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gh_2",
+    "stage": "GROUP_H",
+    "group": "H",
+    "home": "Spain",
+    "away": "Saudi Arabia",
+    "utcDate": "2026-06-18T18:00:00.000Z",
+    "date": "2026-06-18",
+    "time": "18:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gh_3",
+    "stage": "GROUP_H",
+    "group": "H",
+    "home": "Uruguay",
+    "away": "Cape Verde",
+    "utcDate": "2026-06-18T22:00:00.000Z",
+    "date": "2026-06-18",
+    "time": "22:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gh_4",
+    "stage": "GROUP_H",
+    "group": "H",
+    "home": "Spain",
+    "away": "Cape Verde",
+    "utcDate": "2026-06-19T02:00:00.000Z",
+    "date": "2026-06-19",
+    "time": "02:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gh_5",
+    "stage": "GROUP_H",
+    "group": "H",
+    "home": "Uruguay",
+    "away": "Saudi Arabia",
+    "utcDate": "2026-06-19T06:00:00.000Z",
+    "date": "2026-06-19",
+    "time": "06:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gi_0",
+    "stage": "GROUP_I",
+    "group": "I",
+    "home": "France",
+    "away": "Senegal",
+    "utcDate": "2026-06-19T10:00:00.000Z",
+    "date": "2026-06-19",
+    "time": "10:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gi_1",
+    "stage": "GROUP_I",
+    "group": "I",
+    "home": "Norway",
+    "away": "Iraq",
+    "utcDate": "2026-06-19T14:00:00.000Z",
+    "date": "2026-06-19",
+    "time": "14:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gi_2",
+    "stage": "GROUP_I",
+    "group": "I",
+    "home": "France",
+    "away": "Norway",
+    "utcDate": "2026-06-19T18:00:00.000Z",
+    "date": "2026-06-19",
+    "time": "18:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gi_3",
+    "stage": "GROUP_I",
+    "group": "I",
+    "home": "Senegal",
+    "away": "Iraq",
+    "utcDate": "2026-06-19T22:00:00.000Z",
+    "date": "2026-06-19",
+    "time": "22:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gi_4",
+    "stage": "GROUP_I",
+    "group": "I",
+    "home": "France",
+    "away": "Iraq",
+    "utcDate": "2026-06-20T02:00:00.000Z",
+    "date": "2026-06-20",
+    "time": "02:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gi_5",
+    "stage": "GROUP_I",
+    "group": "I",
+    "home": "Senegal",
+    "away": "Norway",
+    "utcDate": "2026-06-20T06:00:00.000Z",
+    "date": "2026-06-20",
+    "time": "06:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gj_0",
+    "stage": "GROUP_J",
+    "group": "J",
+    "home": "Argentina",
+    "away": "Austria",
+    "utcDate": "2026-06-20T10:00:00.000Z",
+    "date": "2026-06-20",
+    "time": "10:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gj_1",
+    "stage": "GROUP_J",
+    "group": "J",
+    "home": "Algeria",
+    "away": "Jordan",
+    "utcDate": "2026-06-20T14:00:00.000Z",
+    "date": "2026-06-20",
+    "time": "14:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gj_2",
+    "stage": "GROUP_J",
+    "group": "J",
+    "home": "Argentina",
+    "away": "Algeria",
+    "utcDate": "2026-06-20T18:00:00.000Z",
+    "date": "2026-06-20",
+    "time": "18:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gj_3",
+    "stage": "GROUP_J",
+    "group": "J",
+    "home": "Austria",
+    "away": "Jordan",
+    "utcDate": "2026-06-20T22:00:00.000Z",
+    "date": "2026-06-20",
+    "time": "22:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gj_4",
+    "stage": "GROUP_J",
+    "group": "J",
+    "home": "Argentina",
+    "away": "Jordan",
+    "utcDate": "2026-06-21T02:00:00.000Z",
+    "date": "2026-06-21",
+    "time": "02:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gj_5",
+    "stage": "GROUP_J",
+    "group": "J",
+    "home": "Austria",
+    "away": "Algeria",
+    "utcDate": "2026-06-21T06:00:00.000Z",
+    "date": "2026-06-21",
+    "time": "06:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gk_0",
+    "stage": "GROUP_K",
+    "group": "K",
+    "home": "Portugal",
+    "away": "Colombia",
+    "utcDate": "2026-06-21T10:00:00.000Z",
+    "date": "2026-06-21",
+    "time": "10:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gk_1",
+    "stage": "GROUP_K",
+    "group": "K",
+    "home": "Congo DR",
+    "away": "Uzbekistan",
+    "utcDate": "2026-06-21T14:00:00.000Z",
+    "date": "2026-06-21",
+    "time": "14:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gk_2",
+    "stage": "GROUP_K",
+    "group": "K",
+    "home": "Portugal",
+    "away": "Congo DR",
+    "utcDate": "2026-06-21T18:00:00.000Z",
+    "date": "2026-06-21",
+    "time": "18:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gk_3",
+    "stage": "GROUP_K",
+    "group": "K",
+    "home": "Colombia",
+    "away": "Uzbekistan",
+    "utcDate": "2026-06-21T22:00:00.000Z",
+    "date": "2026-06-21",
+    "time": "22:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gk_4",
+    "stage": "GROUP_K",
+    "group": "K",
+    "home": "Portugal",
+    "away": "Uzbekistan",
+    "utcDate": "2026-06-22T02:00:00.000Z",
+    "date": "2026-06-22",
+    "time": "02:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gk_5",
+    "stage": "GROUP_K",
+    "group": "K",
+    "home": "Colombia",
+    "away": "Congo DR",
+    "utcDate": "2026-06-22T06:00:00.000Z",
+    "date": "2026-06-22",
+    "time": "06:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gl_0",
+    "stage": "GROUP_L",
+    "group": "L",
+    "home": "England",
+    "away": "Croatia",
+    "utcDate": "2026-06-22T10:00:00.000Z",
+    "date": "2026-06-22",
+    "time": "10:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gl_1",
+    "stage": "GROUP_L",
+    "group": "L",
+    "home": "Ghana",
+    "away": "Panama",
+    "utcDate": "2026-06-22T14:00:00.000Z",
+    "date": "2026-06-22",
+    "time": "14:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gl_2",
+    "stage": "GROUP_L",
+    "group": "L",
+    "home": "England",
+    "away": "Ghana",
+    "utcDate": "2026-06-22T18:00:00.000Z",
+    "date": "2026-06-22",
+    "time": "18:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gl_3",
+    "stage": "GROUP_L",
+    "group": "L",
+    "home": "Croatia",
+    "away": "Panama",
+    "utcDate": "2026-06-22T22:00:00.000Z",
+    "date": "2026-06-22",
+    "time": "22:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gl_4",
+    "stage": "GROUP_L",
+    "group": "L",
+    "home": "England",
+    "away": "Panama",
+    "utcDate": "2026-06-23T02:00:00.000Z",
+    "date": "2026-06-23",
+    "time": "02:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_gl_5",
+    "stage": "GROUP_L",
+    "group": "L",
+    "home": "Croatia",
+    "away": "Ghana",
+    "utcDate": "2026-06-23T06:00:00.000Z",
+    "date": "2026-06-23",
+    "time": "06:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_last16_0",
+    "stage": "LAST_16",
+    "home": "Germany",
+    "away": "Paraguay",
+    "utcDate": "2026-06-29T20:30:00Z",
+    "date": "2026-06-29",
+    "time": "20:30",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_last16_1",
+    "stage": "LAST_16",
+    "home": "France",
+    "away": "Sweden",
+    "utcDate": "2026-06-30T21:00:00Z",
+    "date": "2026-06-30",
+    "time": "21:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_last16_2",
+    "stage": "LAST_16",
+    "home": "South Africa",
+    "away": "Canada",
+    "utcDate": "2026-06-28T19:00:00Z",
+    "date": "2026-06-28",
+    "time": "19:00",
+    "score": {
+      "home": 0,
+      "away": 1
+    },
+    "status": "FT",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_last16_3",
+    "stage": "LAST_16",
+    "home": "Netherlands",
+    "away": "Morocco",
+    "utcDate": "2026-06-30T01:00:00Z",
+    "date": "2026-06-30",
+    "time": "01:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_last16_4",
+    "stage": "LAST_16",
+    "home": "Portugal",
+    "away": "Croatia",
+    "utcDate": "2026-07-02T23:00:00Z",
+    "date": "2026-07-02",
+    "time": "23:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_last16_5",
+    "stage": "LAST_16",
+    "home": "Spain",
+    "away": "Austria",
+    "utcDate": "2026-07-02T19:00:00Z",
+    "date": "2026-07-02",
+    "time": "19:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_last16_6",
+    "stage": "LAST_16",
+    "home": "USA",
+    "away": "Bosnia",
+    "utcDate": "2026-07-02T00:00:00Z",
+    "date": "2026-07-02",
+    "time": "00:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_last16_7",
+    "stage": "LAST_16",
+    "home": "Belgium",
+    "away": "Senegal",
+    "utcDate": "2026-07-01T20:00:00Z",
+    "date": "2026-07-01",
+    "time": "20:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_last16_8",
+    "stage": "LAST_16",
+    "home": "Brazil",
+    "away": "Japan",
+    "utcDate": "2026-06-29T17:00:00Z",
+    "date": "2026-06-29",
+    "time": "17:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_last16_9",
+    "stage": "LAST_16",
+    "home": "Ivory Coast",
+    "away": "Norway",
+    "utcDate": "2026-06-30T17:00:00Z",
+    "date": "2026-06-30",
+    "time": "17:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_last16_10",
+    "stage": "LAST_16",
+    "home": "Mexico",
+    "away": "Ecuador",
+    "utcDate": "2026-07-01T01:00:00Z",
+    "date": "2026-07-01",
+    "time": "01:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_last16_11",
+    "stage": "LAST_16",
+    "home": "England",
+    "away": "DR Congo",
+    "utcDate": "2026-07-01T16:00:00Z",
+    "date": "2026-07-01",
+    "time": "16:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_last16_12",
+    "stage": "LAST_16",
+    "home": "Argentina",
+    "away": "Cape Verde",
+    "utcDate": "2026-07-03T22:00:00Z",
+    "date": "2026-07-03",
+    "time": "22:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_last16_13",
+    "stage": "LAST_16",
+    "home": "Australia",
+    "away": "Egypt",
+    "utcDate": "2026-07-03T18:00:00Z",
+    "date": "2026-07-03",
+    "time": "18:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_last16_14",
+    "stage": "LAST_16",
+    "home": "Switzerland",
+    "away": "Algeria",
+    "utcDate": "2026-07-03T03:00:00Z",
+    "date": "2026-07-03",
+    "time": "03:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_last16_15",
+    "stage": "LAST_16",
+    "home": "Colombia",
+    "away": "Ghana",
+    "utcDate": "2026-07-04T01:30:00Z",
+    "date": "2026-07-04",
+    "time": "01:30",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_round_16_0",
+    "stage": "ROUND_16",
+    "home": "TBD",
+    "away": "TBD",
+    "utcDate": "2026-06-29T12:00:00.000Z",
+    "date": "2026-06-29",
+    "time": "12:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_round_16_1",
+    "stage": "ROUND_16",
+    "home": "TBD",
+    "away": "TBD",
+    "utcDate": "2026-06-30T12:00:00.000Z",
+    "date": "2026-06-30",
+    "time": "12:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_round_16_2",
+    "stage": "ROUND_16",
+    "home": "TBD",
+    "away": "TBD",
+    "utcDate": "2026-07-01T12:00:00.000Z",
+    "date": "2026-07-01",
+    "time": "12:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_round_16_3",
+    "stage": "ROUND_16",
+    "home": "TBD",
+    "away": "TBD",
+    "utcDate": "2026-07-02T12:00:00.000Z",
+    "date": "2026-07-02",
+    "time": "12:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_round_16_4",
+    "stage": "ROUND_16",
+    "home": "TBD",
+    "away": "TBD",
+    "utcDate": "2026-07-03T12:00:00.000Z",
+    "date": "2026-07-03",
+    "time": "12:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_round_16_5",
+    "stage": "ROUND_16",
+    "home": "TBD",
+    "away": "TBD",
+    "utcDate": "2026-07-04T12:00:00.000Z",
+    "date": "2026-07-04",
+    "time": "12:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_round_16_6",
+    "stage": "ROUND_16",
+    "home": "TBD",
+    "away": "TBD",
+    "utcDate": "2026-07-05T12:00:00.000Z",
+    "date": "2026-07-05",
+    "time": "12:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_round_16_7",
+    "stage": "ROUND_16",
+    "home": "TBD",
+    "away": "TBD",
+    "utcDate": "2026-07-06T12:00:00.000Z",
+    "date": "2026-07-06",
+    "time": "12:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_quarter_finals_0",
+    "stage": "QUARTER_FINALS",
+    "home": "TBD",
+    "away": "TBD",
+    "utcDate": "2026-06-29T12:00:00.000Z",
+    "date": "2026-06-29",
+    "time": "12:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_quarter_finals_1",
+    "stage": "QUARTER_FINALS",
+    "home": "TBD",
+    "away": "TBD",
+    "utcDate": "2026-06-30T12:00:00.000Z",
+    "date": "2026-06-30",
+    "time": "12:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_quarter_finals_2",
+    "stage": "QUARTER_FINALS",
+    "home": "TBD",
+    "away": "TBD",
+    "utcDate": "2026-07-01T12:00:00.000Z",
+    "date": "2026-07-01",
+    "time": "12:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_quarter_finals_3",
+    "stage": "QUARTER_FINALS",
+    "home": "TBD",
+    "away": "TBD",
+    "utcDate": "2026-07-02T12:00:00.000Z",
+    "date": "2026-07-02",
+    "time": "12:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_semi_finals_0",
+    "stage": "SEMI_FINALS",
+    "home": "TBD",
+    "away": "TBD",
+    "utcDate": "2026-06-29T12:00:00.000Z",
+    "date": "2026-06-29",
+    "time": "12:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_semi_finals_1",
+    "stage": "SEMI_FINALS",
+    "home": "TBD",
+    "away": "TBD",
+    "utcDate": "2026-06-30T12:00:00.000Z",
+    "date": "2026-06-30",
+    "time": "12:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_final_0",
+    "stage": "FINAL",
+    "home": "TBD",
+    "away": "TBD",
+    "utcDate": "2026-06-29T12:00:00.000Z",
+    "date": "2026-06-29",
+    "time": "12:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  },
+  {
+    "id": "seed_ko_third_place_0",
+    "stage": "THIRD_PLACE",
+    "home": "TBD",
+    "away": "TBD",
+    "utcDate": "2026-06-29T12:00:00.000Z",
+    "date": "2026-06-29",
+    "time": "12:00",
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "status": "SCHEDULED",
+    "minute": 0
+  }
+]

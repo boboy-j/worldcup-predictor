@@ -1,0 +1,44 @@
+name: 定时更新赛程
+
+on:
+  schedule:
+    # 每 30 分钟运行一次 (世界杯期间)
+    - cron: '*/30 * * * *'
+  # 允许手动触发 (GitHub 仓库 Actions 页面 → "Run workflow")
+  workflow_dispatch:
+  # 当 matches.json 或脚本本身变更时运行
+  push:
+    paths:
+      - 'scripts/fetch-matches.js'
+      - 'scripts/generate-seed.js'
+      - 'matches.json'
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 拉取赛程
+        env:
+          FOOTBALL_DATA_KEY: ${{ secrets.FOOTBALL_DATA_KEY }}
+        run: node scripts/fetch-matches.js
+
+      - name: 提交更新
+        run: |
+          git config user.name "worldcup-bot"
+          git config user.email "bot@worldcup2026.app"
+          git add matches.json
+          # 只有真正有变更时才提交
+          if git diff --cached --quiet; then
+            echo "无变更，跳过提交"
+          else
+            git commit -m "chore: 自动更新赛程数据"
+            git push
+          fi

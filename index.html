@@ -1247,6 +1247,36 @@ function updateWS(ok, text) {
   st.textContent = text;
 }
 
+// 从本地 matches.json 加载赛程 (WebSocket 不可用时的后备)
+function loadMatchesJSON() {
+  fetch('./matches.json?v=' + Date.now())
+    .then(res => {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
+    .then(matches => {
+      if (!matches || !Array.isArray(matches) || matches.length === 0) return;
+      // 如果 WebSocket 已经提供了数据，不覆盖
+      if (wsConnected) return;
+      console.log('[JSON] 加载 matches.json: ' + matches.length + ' 场');
+      serverMatches = matches;
+      updateLiveMatches(matches);
+      updateDashboard(matches);
+      renderRecentMatches(matches);
+      renderKnockout(matches);
+      renderSchedule(matches);
+
+      // 更新连接状态显示
+      const badge = document.getElementById('srv-conn');
+      if (badge) badge.innerHTML = '<span class="badge badge-yellow">离线数据</span>';
+      document.getElementById('srv-matches').textContent = matches.length + ' 场';
+      document.getElementById('srv-time').textContent = new Date().toLocaleString('zh-CN');
+    })
+    .catch(err => {
+      console.log('[JSON] 加载比赛数据失败:', err.message);
+    });
+}
+
 function handleWS(data) {
   switch (data.type) {
     case 'initial_data':
@@ -1895,6 +1925,8 @@ function triggerDanmaku() {
 // ==================== 启动 ====================
 populateTeamSelects();
 connectWS();
+// 同时从 matches.json 加载数据 (用作 WebSocket 不可用时的后备)
+loadMatchesJSON();
 </script>
 </body>
 </html>
