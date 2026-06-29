@@ -18,7 +18,7 @@ const path = require('path');
 
 // ===================== 配置 =====================
 const PORT = process.env.PORT || 3000;
-const FOOTBALL_DATA_KEY = process.env.FOOTBALL_DATA_KEY || '6eef39121b224a85bf291b86bd270bc3';
+const FOOTBALL_DATA_KEY = process.env.FOOTBALL_DATA_KEY || process.env.FOOTBALL_DATA_API_KEY || '6eef39121b224a85bf291b86bd270bc3';
 const RAPIDAPI_KEY = process.env.RAPIDAPI_KEY || '';
 
 // 静态文件目录（与 server.js 同级）
@@ -95,6 +95,22 @@ const WORLD_CUP_TEAMS = [
 const TEAMS_MAP = {};
 WORLD_CUP_TEAMS.forEach(t => { TEAMS_MAP[t.name] = t; });
 
+// 球队名称标准化映射 (API名 → 本地名)
+const TEAM_NAME_ALIAS = {
+  'Türkiye': 'Turkiye', 'Turkey': 'Turkiye',
+  'Bosnia-Herzegovina': 'Bosnia',
+  'DR Congo': 'Congo DR',
+  'Curaçao': 'Curacao',
+  'Korea Republic': 'South Korea',
+  'Czech Republic': 'Czechia',
+  'United States': 'USA',
+  'Iran, Islamic Republic of': 'Iran',
+  'Brunei Darussalam': 'Brunei'
+};
+function normalizeTeamName(name) {
+  return TEAM_NAME_ALIAS[name] || name;
+}
+
 // ===================== football-data.org API 调用 =====================
 async function fetchFootballData(endpoint) {
   if (!FOOTBALL_DATA_KEY) return null;
@@ -135,8 +151,8 @@ function parseApiMatchesToInternal(apiData) {
       'CANCELLED': 'CANCELLED'
     };
 
-    const homeName = apiMatch.homeTeam?.name || 'TBD';
-    const awayName = apiMatch.awayTeam?.name || 'TBD';
+    const homeName = normalizeTeamName(apiMatch.homeTeam?.name || 'TBD');
+    const awayName = normalizeTeamName(apiMatch.awayTeam?.name || 'TBD');
 
     // 计算分钟 - 对于IN_PLAY的比赛，根据UTC时间估算
     let minute = 0;
@@ -201,7 +217,7 @@ function parseApiStandings(apiData) {
   apiData.standings.forEach(groupStanding => {
     const groupName = groupStanding.group.replace('Group ', '');
     standings[groupName] = groupStanding.table.map(entry => {
-      const teamName = entry.team.name;
+      const teamName = normalizeTeamName(entry.team.name);
       const localTeam = TEAMS_MAP[teamName];
       return {
         position: entry.position,
@@ -372,34 +388,31 @@ const KNOWN_SCORERS = {
   'Curaçao': ['Rangelo Janga', 'Leandro Bacuna', 'Jearl Margaritha', 'Kenji Gorré', 'Charlison Benschop'],
   'Bosnia-Herzegovina': ['Edin Džeko', 'Miralem Pjanić', 'Rade Krunić', 'Ermedin Demirović', 'Amar Dedić'],
   'New Zealand': ['Chris Wood', 'Marco Rojas', 'Elijah Just', 'Ben Waine', 'Matthew Garbett'],
-  'Czechia': ['Patrik Schick', 'Tomáš Souček', 'Adam Hložek', 'Václav Černý', 'Jan Kuchta'],
-  'Curaçao': ['Rangelo Janga', 'Leandro Bacuna', 'Kenji Gorré', 'Jearl Margaritha', 'Juninho Bacuna']
+  'Czechia': ['Patrik Schick', 'Tomáš Souček', 'Adam Hložek', 'Václav Černý', 'Jan Kuchta']
 };
-
-// 默认射手名单（用于未知球队的 fallback，避免出现 "Player"）
-const DEFAULT_SCORERS = ['GoalScorer', 'Striker', 'Forward', 'Midfielder', 'Winger',
-  'Attacker', 'Playmaker', 'Talisman', 'Captain', 'SuperSub',
-  'Veteran', 'Prodigy', 'Ace', 'Maestro', 'Sharpshooter'];
 
 function updateScorersFromApi(matches) {
   const goalCounts = {};
   const finishedMatches = matches.filter(m => m.status === 'FT');
 
   finishedMatches.forEach(m => {
-    const homeScorers = KNOWN_SCORERS[m.home] || DEFAULT_SCORERS;
-    const awayScorers = KNOWN_SCORERS[m.away] || DEFAULT_SCORERS;
+    const homeScorers = KNOWN_SCORERS[m.home];
+    const awayScorers = KNOWN_SCORERS[m.away];
 
-    // 随机分配进球给不同球员（根据比分）
-    const homeGoals = m.score.home || 0;
-    const awayGoals = m.score.away || 0;
-
-    for (let i = 0; i < homeGoals; i++) {
-      const p = homeScorers[i % homeScorers.length];
-      goalCounts[p] = (goalCounts[p] || 0) + 1;
+    // 只分配已知球队的射手（未知球队不生成假数据）
+    if (homeScorers) {
+      const homeGoals = m.score.home || 0;
+      for (let i = 0; i < homeGoals; i++) {
+        const p = homeScorers[i % homeScorers.length];
+        goalCounts[p] = (goalCounts[p] || 0) + 1;
+      }
     }
-    for (let i = 0; i < awayGoals; i++) {
-      const p = awayScorers[i % awayScorers.length];
-      goalCounts[p] = (goalCounts[p] || 0) + 1;
+    if (awayScorers) {
+      const awayGoals = m.score.away || 0;
+      for (let i = 0; i < awayGoals; i++) {
+        const p = awayScorers[i % awayScorers.length];
+        goalCounts[p] = (goalCounts[p] || 0) + 1;
+      }
     }
   });
 
