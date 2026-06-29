@@ -124,9 +124,6 @@ body {
 .header-bar h1 { color:#fff; }
 .header-bar p.sub { color:rgba(255,255,255,0.75); }
 .nav-scroll {
-  position: sticky;
-  top: 56px;
-  z-index: 40;
   background: var(--bg0);
   border-bottom: 1px solid var(--border-1);
 }
@@ -634,8 +631,11 @@ body {
 
 <div id="goal-notifications"></div>
 
+<!-- ===== 粘性容器：顶栏 + 导航 （合并 sticky，消除间隙）===== -->
+<div class="sticky top-0 z-50">
+
 <!-- ===== 顶栏 ===== -->
-<header class="header-bar sticky top-0 z-50">
+<header class="header-bar">
   <div class="max-w-7xl mx-auto px-3 py-2 flex items-center justify-between">
     <div class="flex items-center gap-2">
       <div class="text-2xl">🏆</div>
@@ -685,6 +685,7 @@ body {
     </div>
   </div>
 </nav>
+</div><!-- /sticky-container -->
 
 <!-- ===== 主体 ===== -->
 <main class="max-w-7xl mx-auto px-3 pt-3 pb-24">
