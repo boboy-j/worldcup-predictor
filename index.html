@@ -537,6 +537,28 @@ body {
 .sponsor-info h4 { font-size:0.82rem; font-weight:700; color:var(--text0); margin:0 0 2px; }
 .sponsor-info p { font-size:0.72rem; color:var(--text-muted); margin:0; line-height:1.4; }
 
+/* 中国印记大事记 */
+.china-facts { margin-bottom:24px; }
+.facts-title { font-size:0.95rem; font-weight:700; color:var(--text0); text-align:center; margin:0 0 12px; }
+.facts-grid { display:grid; grid-template-columns:1fr; gap:8px; }
+@media(min-width:480px){ .facts-grid { grid-template-columns:1fr 1fr; } }
+.fact-card {
+  display:flex; gap:8px; align-items:flex-start;
+  background:var(--bg1); border:1px solid var(--border-1);
+  border-left:3px solid var(--gold);
+  border-radius:8px; padding:10px 12px;
+  transition:transform 0.2s;
+}
+.fact-card:hover { transform:translateX(3px); }
+.fact-year {
+  font-size:0.65rem; font-weight:700; color:var(--accent-3);
+  background:var(--gold-soft); border-radius:6px;
+  padding:1px 6px; white-space:nowrap; align-self:flex-start;
+}
+.fact-icon { font-size:1.2rem; line-height:1; flex-shrink:0; }
+.fact-text { font-size:0.72rem; color:var(--text2); line-height:1.4; flex:1; }
+.fact-text strong { color:var(--text0); }
+
 .cheer-quote {
   text-align:center; font-size:0.82rem; color:var(--text2);
   background:var(--gold-soft); border:1px solid var(--gold);
@@ -954,6 +976,43 @@ body {
       <i class="fas fa-quote-left"></i>
       网友们常说：<strong>中国除了足球队没去，其他的都去了！</strong> 期待有一天，中国足球能真正站上世界杯的舞台！
       <i class="fas fa-quote-right"></i>
+    </div>
+
+    <!-- 中国元素大事记 -->
+    <div class="china-facts">
+      <h3 class="facts-title">📌 世界杯里的中国印记</h3>
+      <div class="facts-grid">
+        <div class="fact-card">
+          <div class="fact-year">2022</div>
+          <div class="fact-icon">🏟️</div>
+          <div class="fact-text">中国铁建承建卡塔尔<strong>卢塞尔体育场</strong>，世界杯决赛场地，中国造！</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-year">2022</div>
+          <div class="fact-icon">🐼</div>
+          <div class="fact-text">两只大熊猫<strong>"四海"和"京京"</strong>旅居卡塔尔，专门建了熊猫馆，世界杯期间圈粉无数</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-year">2022</div>
+          <div class="fact-icon">🦺</div>
+          <div class="fact-text">中国裁判<strong>马宁</strong>执法卡塔尔世界杯，成为首位亮相世界杯的中国主裁判</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-year">2022</div>
+          <div class="fact-icon">🧸</div>
+          <div class="fact-text">世界杯吉祥物<strong>La'eeb</strong>、纪念品、旗帜……70%周边产品来自义乌制造</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-year">2022</div>
+          <div class="fact-icon">💰</div>
+          <div class="fact-text">中国企业赞助总金额<strong>约14亿美元</strong>，超越美国高居全球第一</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-year">2026</div>
+          <div class="fact-icon">📺</div>
+          <div class="fact-text">央视/咪咕/抖音全平台4K转播，中国球迷在家门口看世界杯夜</div>
+        </div>
+      </div>
     </div>
 
     <!-- 圆形加油按钮 -->
