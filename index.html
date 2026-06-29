@@ -516,10 +516,6 @@ body {
 
 /* ========== 为中国加油 ========== */
 .cheer-container { max-width:680px; margin:0 auto; padding:16px; }
-.cheer-header { text-align:center; margin-bottom:20px; }
-.cheer-flag-icon { font-size:3rem; margin-bottom:8px; }
-.cheer-header h2 { font-size:1.3rem; font-weight:800; color:var(--text0); margin:0 0 4px; }
-.cheer-subtitle { font-size:0.78rem; color:var(--text-muted); margin:0; }
 
 .sponsors-grid { display:grid; grid-template-columns:1fr; gap:10px; margin-bottom:20px; }
 @media(min-width:500px){ .sponsors-grid { grid-template-columns:1fr 1fr; } }
@@ -906,13 +902,29 @@ body {
 <!-- ═══ 为中国加油 ═══ -->
 <section id="tab-cheer" class="hidden fade-in">
   <div class="cheer-container">
-    <div class="cheer-header">
-      <div class="cheer-flag-icon">🇨🇳</div>
-      <h2>加油 🇨🇳</h2>
-      <p class="cheer-subtitle">虽然中国队没去世界杯，但中国元素无处不在！</p>
+
+    <!-- 1. 加油按钮（最上方） -->
+    <div class="cheer-btn-wrapper" id="cheerBtnWrapper">
+      <button class="cheer-btn" id="cheerBtn" onclick="triggerDanmaku()">
+        <span class="cheer-btn-big">加油</span>
+        <span class="cheer-btn-small">中国队</span>
+      </button>
+      <p class="cheer-hint">点击为中国队加油 💪</p>
     </div>
 
-    <!-- 赞助商列表 -->
+    <!-- 2. 世界杯里的中国印记 -->
+    <h3 class="facts-title" style="margin-top:0;">📌 世界杯里的中国印记</h3>
+    <div class="china-facts">
+      <div class="facts-grid" style="grid-template-columns:1fr;">
+        <div class="fact-card">
+          <div class="fact-year">2026</div>
+          <div class="fact-icon">📺</div>
+          <div class="fact-text">央视/咪咕/抖音全平台4K转播，中国球迷在家门口看世界杯夜</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 中国品牌军团 -->
     <div class="sponsors-grid">
       <div class="sponsor-card">
         <div class="sponsor-icon">📺</div>
@@ -972,57 +984,41 @@ body {
       </div>
     </div>
 
+    <!-- 4. 2026更多中国力量 -->
+    <h3 class="facts-title">🎯 2026 更多中国力量</h3>
+    <div class="china-facts">
+      <div class="facts-grid">
+        <div class="fact-card">
+          <div class="fact-year">2026</div>
+          <div class="fact-icon">🤖</div>
+          <div class="fact-text">中国宇树科技智能机器人将亮相2026世界杯赛场，提供引导与互动服务</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-year">2026</div>
+          <div class="fact-icon">🧧</div>
+          <div class="fact-text">支付宝/Alipay成为2026世界杯官方数字支付合作伙伴</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-year">2026</div>
+          <div class="fact-icon">🏟️</div>
+          <div class="fact-text">多座2026世界杯场馆LED屏、座椅、空调等由中国企业供应</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-year">2026</div>
+          <div class="fact-icon">🎮</div>
+          <div class="fact-text">腾讯获得2026世界杯数字媒体版权，赛事直播与互动</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. 底部寄语 + 国旗 -->
     <div class="cheer-quote">
       <i class="fas fa-quote-left"></i>
       网友们常说：<strong>中国除了足球队没去，其他的都去了！</strong> 期待有一天，中国足球能真正站上世界杯的舞台！
       <i class="fas fa-quote-right"></i>
     </div>
 
-    <!-- 中国元素大事记 -->
-    <div class="china-facts">
-      <h3 class="facts-title">📌 世界杯里的中国印记</h3>
-      <div class="facts-grid">
-        <div class="fact-card">
-          <div class="fact-year">2022</div>
-          <div class="fact-icon">🏟️</div>
-          <div class="fact-text">中国铁建承建卡塔尔<strong>卢塞尔体育场</strong>，世界杯决赛场地，中国造！</div>
-        </div>
-        <div class="fact-card">
-          <div class="fact-year">2022</div>
-          <div class="fact-icon">🐼</div>
-          <div class="fact-text">两只大熊猫<strong>"四海"和"京京"</strong>旅居卡塔尔，专门建了熊猫馆，世界杯期间圈粉无数</div>
-        </div>
-        <div class="fact-card">
-          <div class="fact-year">2022</div>
-          <div class="fact-icon">🦺</div>
-          <div class="fact-text">中国裁判<strong>马宁</strong>执法卡塔尔世界杯，成为首位亮相世界杯的中国主裁判</div>
-        </div>
-        <div class="fact-card">
-          <div class="fact-year">2022</div>
-          <div class="fact-icon">🧸</div>
-          <div class="fact-text">世界杯吉祥物<strong>La'eeb</strong>、纪念品、旗帜……70%周边产品来自义乌制造</div>
-        </div>
-        <div class="fact-card">
-          <div class="fact-year">2022</div>
-          <div class="fact-icon">💰</div>
-          <div class="fact-text">中国企业赞助总金额<strong>约14亿美元</strong>，超越美国高居全球第一</div>
-        </div>
-        <div class="fact-card">
-          <div class="fact-year">2026</div>
-          <div class="fact-icon">📺</div>
-          <div class="fact-text">央视/咪咕/抖音全平台4K转播，中国球迷在家门口看世界杯夜</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 圆形加油按钮 -->
-    <div class="cheer-btn-wrapper" id="cheerBtnWrapper">
-      <button class="cheer-btn" id="cheerBtn" onclick="triggerDanmaku()">
-        <span class="cheer-btn-big">加油</span>
-        <span class="cheer-btn-small">中国队</span>
-      </button>
-      <p class="cheer-hint">点击为中国队加油 💪</p>
-    </div>
+    <div style="text-align:center;font-size:4rem;margin-top:16px;opacity:0.8;">🇨🇳</div>
   </div>
 
   <!-- 弹幕容器 -->
