@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026世界杯 · 中国元素</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: #0b0f1a;
+      color: #e8e8e8;
+      min-height: 100vh;
+    }
+
+    /* ===== 导航 ===== */
+    .nav {
+      background: linear-gradient(135deg, #0f1421, #1a1f35);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      border-bottom: 1px solid rgba(255,215,0,0.15);
+      flex-wrap: wrap;
+    }
+    .nav-logo {
+      font-size: 22px;
+      font-weight: 700;
+      background: linear-gradient(90deg, #ffd700, #f0a500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      white-space: nowrap;
+    }
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .nav-tab {
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.2s;
+      color: #aaa;
+      border: 1px solid transparent;
+    }
+    .nav-tab:hover { color: #fff; background: rgba(255,215,0,0.08); }
+    .nav-tab.active {
+      color: #1a1a1a;
+      background: linear-gradient(90deg, #ffd700, #f0a500);
+      font-weight: 600;
+    }
+
+    /* ===== 加油区域 ===== */
+    .cheer-section {
+      text-align: center;
+      padding: 48px 20px 40px;
+      background: linear-gradient(180deg, #0f1421 0%, #161c2e 100%);
+      border-bottom: 1px solid rgba(255,215,0,0.08);
+    }
+    .cheer-title {
+      font-size: 20px;
+      color: #ffd700;
+      margin-bottom: 18px;
+      font-weight: 600;
+    }
+    .cheer-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 48px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #de2910, #b2220a);
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(222,41,16,0.4);
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .cheer-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 32px rgba(222,41,16,0.6);
+    }
+    .cheer-btn:active { transform: scale(0.97); }
+    .cheer-btn .flag-icon {
+      font-size: 28px;
+      line-height: 1;
+    }
+    .cheer-count {
+      font-size: 14px;
+      color: #888;
+      margin-top: 12px;
+    }
+    .cheer-count span { color: #ffd700; font-weight: 700; font-size: 18px; }
+
+    /* confetti */
+    .confetti-container {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .confetti-piece {
+      position: absolute;
+      width: 8px; height: 8px;
+      top: -10px;
+      animation: confetti-fall linear forwards;
+    }
+    @keyframes confetti-fall {
+      0%   { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* ===== 中国印记 ===== */
+    .china-section {
+      padding: 48px 20px 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 36px;
+    }
+    .section-title .cn { color: #ffd700; }
+    .section-title .sub {
+      display: block;
+      font-size: 14px;
+      font-weight: 400;
+      color: #888;
+      margin-top: 6px;
+    }
+
+    /* 赞助商卡片 */
+    .sponsor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 18px;
+      margin-bottom: 48px;
+    }
+    .sponsor-card {
+      background: linear-gradient(145deg, #191f33, #101524);
+      border-radius: 14px;
+      padding: 24px 16px;
+      text-align: center;
+      border: 1px solid rgba(255,215,0,0.08);
+      transition: 0.3s;
+    }
+    .sponsor-card:hover {
+      border-color: rgba(255,215,0,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(255,215,0,0.06);
+    }
+    .sponsor-logo {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+    .sponsor-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .sponsor-desc {
+      font-size: 13px;
+      color: #999;
+    }
+    .sponsor-badge {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 3px 12px;
+      border-radius: 12px;
+      background: rgba(255,215,0,0.12);
+      color: #ffd700;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* 更多中国元素 */
+    .more-elements {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .element-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 20px;
+      transition: 0.2s;
+    }
+    .element-card:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,215,0,0.2);
+    }
+    .element-icon { font-size: 28px; margin-bottom: 6px; }
+    .element-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .element-desc {
+      font-size: 13px;
+      color: #999;
+      line-height: 1.6;
+    }
+
+    /* ===== 底部寄语 ===== */
+    .footer-wish {
+      text-align: center;
+      padding: 48px 20px 32px;
+      border-top: 1px solid rgba(255,215,0,0.08);
+      margin-top: 16px;
+    }
+    .footer-wish p {
+      font-size: 20px;
+      color: #ffd700;
+      font-weight: 600;
+      letter-spacing: 2px;
+      line-height: 1.6;
+    }
+    .footer-flag {
+      text-align: center;
+      padding: 16px 20px 40px;
+      font-size: 80px;
+      line-height: 1;
+      opacity: 0.85;
+    }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 600px) {
+      .nav { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .cheer-btn { padding: 12px 36px; font-size: 17px; }
+      .section-title { font-size: 22px; }
+      .sponsor-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .more-elements { grid-template-columns: 1fr; }
+      .footer-wish p { font-size: 17px; }
+      .footer-flag { font-size: 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== 导航 ===== -->
+  <nav class="nav">
+    <div class="nav-logo">⚽ 2026 世界杯</div>
+    <div class="nav-tabs">
+      <span class="nav-tab">赛程</span>
+      <span class="nav-tab">球队</span>
+      <span class="nav-tab active">中国元素</span>
+      <span class="nav-tab">场馆</span>
+      <span class="nav-tab">数据</span>
+    </div>
+  </nav>
+
+  <!-- ===== 🇨🇳 加油 (最上面) ===== -->
+  <section class="cheer-section">
+    <div class="cheer-title">🇨🇳 为中国队加油！</div>
+    <button class="cheer-btn" id="cheerBtn">
+      <span class="flag-icon">🇨🇳</span>
+      加油
+    </button>
+    <div class="cheer-count">已有 <span id="countDisplay">2,569</span> 人为中国队加油</div>
+  </section>
+
+  <!-- ===== 世界杯里的中国印记 ===== -->
+  <section class="china-section">
+    <h2 class="section-title">
+      <span class="cn">🏮 世界杯里的中国印记</span>
+      <span class="sub">2026 美加墨世界杯 · 中国力量</span>
+    </h2>
+
+    <!-- 赞助商 -->
+    <h3 style="color:#ccc;font-size:18px;margin-bottom:16px;font-weight:600;">🏆 官方赞助商</h3>
+    <div class="sponsor-grid">
+      <div class="sponsor-card">
+        <div class="sponsor-logo">📺</div>
+        <div class="sponsor-name">海信</div>
+        <div class="sponsor-desc">Hisense · 连续两届世界杯官方赞助商</div>
+        <span class="sponsor-badge">FIFA 官方赞助商</span>
+      </div>
+      <div class="sponsor-card">
+        <div class="sponsor-logo">🚗</div>
+        <div class="sponsor-name">比亚迪</div>
+        <div class="sponsor-desc">BYD · 2026 世界杯官方新能源汽车合作伙伴</div>
+        <span class="sponsor-badge">官方合作伙伴</span>
+      </div>
+      <div class="sponsor-card">
+        <div class="sponsor-logo">🥛</div>
+        <div class="sponsor-name">蒙牛</div>
+        <div class="sponsor-desc">Mengniu · 世界杯全球官方赞助商</div>
+        <span class="sponsor-badge">FIFA 官方赞助商</span>
+      </div>
+      <div class="sponsor-card">
+        <div class="sponsor-logo">📱</div>
+        <div class="sponsor-name">vivo</div>
+        <div class="sponsor-desc">vivo · 世界杯官方手机合作伙伴</div>
+        <span class="sponsor-badge">官方合作伙伴</span>
+      </div>
+      <div class="sponsor-card">
+        <div class="sponsor-logo">🏗️</div>
+        <div class="sponsor-name">万达</div>
+        <div class="sponsor-desc">Wanda · FIFA 顶级合作伙伴</div>
+        <span class="sponsor-badge">FIFA 合作伙伴</span>
+      </div>
+    </div>
+
+    <!-- 更多中国元素 -->
+    <h3 style="color:#ccc;font-size:18px;margin-bottom:16px;font-weight:600;">🎯 更多中国元素</h3>
+    <div class="more-elements">
+      <div class="element-card">
+        <div class="element-icon">📡</div>
+        <div class="element-title">央视 / 咪咕 · 独家转播</div>
+        <div class="element-desc">中央广播电视总台（CCTV）与中国移动咪咕获得 2026 世界杯独家转播权，覆盖全国数亿观众。</div>
+      </div>
+      <div class="element-card">
+        <div class="element-icon">🤖</div>
+        <div class="element-title">宇树科技 · 智能机器人</div>
+        <div class="element-desc">中国宇树科技的智能机器人将亮相 2026 世界杯赛场，提供引导、互动等服务。</div>
+      </div>
+      <div class="element-card">
+        <div class="element-icon">🧧</div>
+        <div class="element-title">支付宝 · 数字支付</div>
+        <div class="element-desc">支付宝/Alipay 成为 2026 世界杯官方数字支付合作伙伴，方便全球球迷支付。</div>
+      </div>
+      <div class="element-card">
+        <div class="element-icon">🏟️</div>
+        <div class="element-title">中国制造 · 场馆设施</div>
+        <div class="element-desc">多座 2026 世界杯场馆的 LED 显示屏、座椅、空调设备等由中国企业供应。</div>
+      </div>
+      <div class="element-card">
+        <div class="element-icon">🪁</div>
+        <div class="element-title">义乌制造 · 球迷周边</div>
+        <div class="element-desc">义乌生产的旗帜、助威棒、球迷服饰等周边产品占据 2026 世界杯纪念品的大部分份额。</div>
+      </div>
+      <div class="element-card">
+        <div class="element-icon">🎮</div>
+        <div class="element-title">腾讯 · 数字平台</div>
+        <div class="element-desc">腾讯获得 2026 世界杯数字媒体版权，旗下平台提供赛事直播、集锦与互动。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 底部寄语 ===== -->
+  <section class="footer-wish">
+    <p>🇨🇳<br>期待有一天，中国国足球能真正站上世界杯的舞台！</p>
+  </section>
+  <div class="footer-flag">🇨🇳</div>
+
+  <!-- ===== Confetti 容器 ===== -->
+  <div class="confetti-container" id="confettiContainer"></div>
+
+  <script>
+    // 加油按钮 — 计数 + 礼花
+    let count = 2569;
+    const countDisplay = document.getElementById('countDisplay');
+    const cheerBtn = document.getElementById('cheerBtn');
+    const confettiContainer = document.getElementById('confettiContainer');
+
+    cheerBtn.addEventListener('click', () => {
+      count++;
+      countDisplay.textContent = count.toLocaleString();
+      launchConfetti();
+    });
+
+    function launchConfetti() {
+      const colors = ['#de2910', '#ffd700', '#ffffff', '#ff6b35', '#ffdd00'];
+      for (let i = 0; i < 60; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + '%';
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.width = (Math.random() * 6 + 4) + 'px';
+        piece.style.height = (Math.random() * 6 + 4) + 'px';
+        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        piece.style.animationDelay = (Math.random() * 0.5) + 's';
+        confettiContainer.appendChild(piece);
+        setTimeout(() => piece.remove(), 3000);
+      }
+    }
+
+    // 导航高亮
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelector('.nav-tab.active')?.classList.remove('active');
+        tab.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
