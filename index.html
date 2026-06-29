@@ -1546,13 +1546,24 @@ const LAST_16_SEED = [
   { home:'Switzerland', away:'Algeria', utcDate:'2026-07-03T03:00:00Z' },
   { home:'Colombia', away:'Ghana',     utcDate:'2026-07-04T01:30:00Z' },
 ];
+const ROUND_16_SEED = [
+  { home:'TBD', away:'TBD', utcDate:'2026-07-04T21:00:00Z', date:'2026-07-04', time:'21:00' },
+  { home:'Canada', away:'TBD', utcDate:'2026-07-04T17:00:00Z', date:'2026-07-04', time:'17:00' },
+  { home:'TBD', away:'TBD', utcDate:'2026-07-06T19:00:00Z', date:'2026-07-06', time:'19:00' },
+  { home:'TBD', away:'TBD', utcDate:'2026-07-07T00:00:00Z', date:'2026-07-07', time:'00:00' },
+  { home:'TBD', away:'TBD', utcDate:'2026-07-05T20:00:00Z', date:'2026-07-05', time:'20:00' },
+  { home:'TBD', away:'TBD', utcDate:'2026-07-06T00:00:00Z', date:'2026-07-06', time:'00:00' },
+  { home:'TBD', away:'TBD', utcDate:'2026-07-07T16:00:00Z', date:'2026-07-07', time:'16:00' },
+  { home:'TBD', away:'TBD', utcDate:'2026-07-07T20:00:00Z', date:'2026-07-07', time:'20:00' },
+];
 function renderKoRoundContent(el, round, koMap) {
   const ms = koMap[round.stage];
   if (!ms || ms.length === 0) {
     // 无数据时插入占位赛程
     if (round.stage === 'LAST_16') {
-      // 使用种子数据
       koMap[round.stage] = LAST_16_SEED;
+    } else if (round.stage === 'ROUND_16') {
+      koMap[round.stage] = ROUND_16_SEED;
     } else {
       const count = round.stage === 'ROUND_16' ? 8 : round.stage === 'QUARTER_FINALS' ? 4 : round.stage === 'SEMI_FINALS' ? 2 : 1;
       koMap[round.stage] = Array.from({ length: count }, () => ({ home: 'TBD', away: 'TBD' }));
@@ -1623,7 +1634,7 @@ function renderSchedule(matches) {
 
   // 阶段排序权重
   const stageOrder = {};
-  'GROUP_A,GROUP_B,GROUP_C,GROUP_D,GROUP_E,GROUP_F,GROUP_G,GROUP_H,GROUP_I,GROUP_J,GROUP_K,GROUP_L,ROUND_16,LAST_16,QUARTER_FINALS,SEMI_FINALS,THIRD_PLACE,FINAL'
+  'GROUP_A,GROUP_B,GROUP_C,GROUP_D,GROUP_E,GROUP_F,GROUP_G,GROUP_H,GROUP_I,GROUP_J,GROUP_K,GROUP_L,LAST_16,ROUND_16,QUARTER_FINALS,SEMI_FINALS,THIRD_PLACE,FINAL'
     .split(',').forEach((s, i) => stageOrder[s] = i);
 
   function stageRank(stage) {
