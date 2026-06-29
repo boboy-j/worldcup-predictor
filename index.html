@@ -1574,36 +1574,54 @@ function renderSchedule(matches) {
   // 排序
   items.sort((a, b) => a.sortKey - b.sortKey);
 
-  // 分组渲染
-  el.innerHTML = items.map(item => {
-    const m = item.match;
-    const ht = teams[m.home] || { flag: '' }, at = teams[m.away] || { flag: '' };
-    const hg = typeof m.score === 'object' ? (m.score.home != null ? m.score.home : '-') : '-';
-    const ag = typeof m.score === 'object' ? (m.score.away != null ? m.score.away : '-') : '-';
-    const isFT = m.status === 'FT', isLive = m.status === 'LIVE';
-    let statusTag, scoreDisplay;
-    if (isFT) { statusTag = '<span class="status-tag ft">✅ 已结束</span>'; scoreDisplay = '<span class="font-bold" style="color:var(--green-fg)">' + hg + '</span><span class="mx-1" style="color:var(--text-muted)">:</span><span class="font-bold" style="color:var(--green-fg)">' + ag + '</span>'; }
-    else if (isLive) { statusTag = '<span class="status-tag live">🔴 进行中 ' + (m.minute || '') + '\'</span>'; scoreDisplay = '<span class="font-bold" style="color:var(--red-fg)">' + hg + '</span><span class="mx-1" style="color:var(--text-muted)">:</span><span class="font-bold" style="color:var(--red-fg)">' + ag + '</span>'; }
-    else { statusTag = '<span class="status-tag scheduled">⏳ 未开赛</span>'; scoreDisplay = '<span style="color:var(--text-muted)">- : -</span>'; }
+  // 分组渲染 — 按日期
+  const groups = {};
+  items.forEach(item => {
+    const key = item.dateKey || '__unknown__';
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(item);
+  });
 
-    let timeHtml = '';
-    if (item.time) {
-      const d = new Date(item.time);
-      if (!isNaN(d.getTime())) {
-        timeHtml = '<span style="font-size:0.65rem;color:var(--text-muted);margin-right:8px;white-space:nowrap">' +
-          ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2) + '</span>';
-      }
+  const weekdays = ['周日','周一','周二','周三','周四','周五','周六'];
+  el.innerHTML = Object.keys(groups).sort().map(dateKey => {
+    const group = groups[dateKey];
+    let dateLabel;
+    if (dateKey === '__unknown__') {
+      dateLabel = '📅 待定';
     } else {
-      timeHtml = '<span style="font-size:0.65rem;color:var(--text-muted);margin-right:8px;white-space:nowrap">' +
-        (m.stage || '').replace(/_/g, ' ') + '</span>';
+      const d = new Date(dateKey + 'T00:00:00');
+      dateLabel = (d.getMonth() + 1) + '月' + d.getDate() + '日 ' + weekdays[d.getDay()];
     }
-
-    return '<div class="schedule-item" style="gap:4px">' +
-      timeHtml +
-      '<div class="teams"><span style="font-size:1.3rem">' + ht.flag + '</span><span class="team-name">' + m.home + '</span></div>' +
-      '<div class="vs-score">' + scoreDisplay + '</div>' +
-      '<div class="teams" style="justify-content:flex-end"><span class="team-name">' + m.away + '</span><span style="font-size:1.3rem">' + at.flag + '</span></div>' +
-      statusTag + '</div>';
+    return '<div class="schedule-stage-title">' + dateLabel +
+      ' <span style="color:var(--text-muted);font-weight:400;font-size:0.75rem">(' + group.length + '场)</span></div>' +
+      group.map(item => {
+        const m = item.match;
+        const ht = teams[m.home] || { flag: '' }, at = teams[m.away] || { flag: '' };
+        const hg = typeof m.score === 'object' ? (m.score.home != null ? m.score.home : '-') : '-';
+        const ag = typeof m.score === 'object' ? (m.score.away != null ? m.score.away : '-') : '-';
+        const isFT = m.status === 'FT', isLive = m.status === 'LIVE';
+        let statusTag, scoreDisplay;
+        if (isFT) { statusTag = '<span class="status-tag ft">✅ 已结束</span>'; scoreDisplay = '<span class="font-bold" style="color:var(--green-fg)">' + hg + '</span><span class="mx-1" style="color:var(--text-muted)">:</span><span class="font-bold" style="color:var(--green-fg)">' + ag + '</span>'; }
+        else if (isLive) { statusTag = '<span class="status-tag live">🔴 进行中 ' + (m.minute || '') + '\'</span>'; scoreDisplay = '<span class="font-bold" style="color:var(--red-fg)">' + hg + '</span><span class="mx-1" style="color:var(--text-muted)">:</span><span class="font-bold" style="color:var(--red-fg)">' + ag + '</span>'; }
+        else { statusTag = '<span class="status-tag scheduled">⏳ 未开赛</span>'; scoreDisplay = '<span style="color:var(--text-muted)">- : -</span>'; }
+        let timeHtml = '';
+        if (item.time) {
+          const d = new Date(item.time);
+          if (!isNaN(d.getTime())) {
+            timeHtml = '<span style="font-size:0.65rem;color:var(--text-muted);margin-right:8px;white-space:nowrap">' +
+              ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2) + '</span>';
+          }
+        } else {
+          timeHtml = '<span style="font-size:0.65rem;color:var(--text-muted);margin-right:8px;white-space:nowrap">' +
+            (m.stage || '').replace(/_/g, ' ') + '</span>';
+        }
+        return '<div class="schedule-item" style="gap:4px">' +
+          timeHtml +
+          '<div class="teams"><span style="font-size:1.3rem">' + ht.flag + '</span><span class="team-name">' + m.home + '</span></div>' +
+          '<div class="vs-score">' + scoreDisplay + '</div>' +
+          '<div class="teams" style="justify-content:flex-end"><span class="team-name">' + m.away + '</span><span style="font-size:1.3rem">' + at.flag + '</span></div>' +
+          statusTag + '</div>';
+      }).join('');
   }).join('');
 }
 
