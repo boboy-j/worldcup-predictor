@@ -1396,9 +1396,9 @@
     "stage": "ROUND_16",
     "home": "TBD",
     "away": "TBD",
-    "utcDate": "2026-06-29T12:00:00.000Z",
-    "date": "2026-06-29",
-    "time": "12:00",
+    "utcDate": "2026-07-04T21:00:00Z",
+    "date": "2026-07-04",
+    "time": "21:00",
     "score": {
       "home": 0,
       "away": 0
@@ -1409,11 +1409,11 @@
   {
     "id": "seed_ko_round_16_1",
     "stage": "ROUND_16",
-    "home": "TBD",
+    "home": "Canada",
     "away": "TBD",
-    "utcDate": "2026-06-30T12:00:00.000Z",
-    "date": "2026-06-30",
-    "time": "12:00",
+    "utcDate": "2026-07-04T17:00:00Z",
+    "date": "2026-07-04",
+    "time": "17:00",
     "score": {
       "home": 0,
       "away": 0
@@ -1426,9 +1426,9 @@
     "stage": "ROUND_16",
     "home": "TBD",
     "away": "TBD",
-    "utcDate": "2026-07-01T12:00:00.000Z",
-    "date": "2026-07-01",
-    "time": "12:00",
+    "utcDate": "2026-07-06T19:00:00Z",
+    "date": "2026-07-06",
+    "time": "19:00",
     "score": {
       "home": 0,
       "away": 0
@@ -1441,9 +1441,9 @@
     "stage": "ROUND_16",
     "home": "TBD",
     "away": "TBD",
-    "utcDate": "2026-07-02T12:00:00.000Z",
-    "date": "2026-07-02",
-    "time": "12:00",
+    "utcDate": "2026-07-07T00:00:00Z",
+    "date": "2026-07-07",
+    "time": "00:00",
     "score": {
       "home": 0,
       "away": 0
@@ -1456,9 +1456,9 @@
     "stage": "ROUND_16",
     "home": "TBD",
     "away": "TBD",
-    "utcDate": "2026-07-03T12:00:00.000Z",
-    "date": "2026-07-03",
-    "time": "12:00",
+    "utcDate": "2026-07-05T20:00:00Z",
+    "date": "2026-07-05",
+    "time": "20:00",
     "score": {
       "home": 0,
       "away": 0
@@ -1471,9 +1471,9 @@
     "stage": "ROUND_16",
     "home": "TBD",
     "away": "TBD",
-    "utcDate": "2026-07-04T12:00:00.000Z",
-    "date": "2026-07-04",
-    "time": "12:00",
+    "utcDate": "2026-07-06T00:00:00Z",
+    "date": "2026-07-06",
+    "time": "00:00",
     "score": {
       "home": 0,
       "away": 0
@@ -1486,9 +1486,9 @@
     "stage": "ROUND_16",
     "home": "TBD",
     "away": "TBD",
-    "utcDate": "2026-07-05T12:00:00.000Z",
-    "date": "2026-07-05",
-    "time": "12:00",
+    "utcDate": "2026-07-07T16:00:00Z",
+    "date": "2026-07-07",
+    "time": "16:00",
     "score": {
       "home": 0,
       "away": 0
@@ -1501,9 +1501,9 @@
     "stage": "ROUND_16",
     "home": "TBD",
     "away": "TBD",
-    "utcDate": "2026-07-06T12:00:00.000Z",
-    "date": "2026-07-06",
-    "time": "12:00",
+    "utcDate": "2026-07-07T20:00:00Z",
+    "date": "2026-07-07",
+    "time": "20:00",
     "score": {
       "home": 0,
       "away": 0
@@ -1516,9 +1516,9 @@
     "stage": "QUARTER_FINALS",
     "home": "TBD",
     "away": "TBD",
-    "utcDate": "2026-06-29T12:00:00.000Z",
-    "date": "2026-06-29",
-    "time": "12:00",
+    "utcDate": "2026-07-09T20:00:00Z",
+    "date": "2026-07-09",
+    "time": "20:00",
     "score": {
       "home": 0,
       "away": 0
@@ -1531,9 +1531,9 @@
     "stage": "QUARTER_FINALS",
     "home": "TBD",
     "away": "TBD",
-    "utcDate": "2026-06-30T12:00:00.000Z",
-    "date": "2026-06-30",
-    "time": "12:00",
+    "utcDate": "2026-07-10T19:00:00Z",
+    "date": "2026-07-10",
+    "time": "19:00",
     "score": {
       "home": 0,
       "away": 0
@@ -1546,9 +1546,9 @@
     "stage": "QUARTER_FINALS",
     "home": "TBD",
     "away": "TBD",
-    "utcDate": "2026-07-01T12:00:00.000Z",
-    "date": "2026-07-01",
-    "time": "12:00",
+    "utcDate": "2026-07-11T21:00:00Z",
+    "date": "2026-07-11",
+    "time": "21:00",
     "score": {
       "home": 0,
       "away": 0
@@ -1561,9 +1561,9 @@
     "stage": "QUARTER_FINALS",
     "home": "TBD",
     "away": "TBD",
-    "utcDate": "2026-07-02T12:00:00.000Z",
-    "date": "2026-07-02",
-    "time": "12:00",
+    "utcDate": "2026-07-12T01:00:00Z",
+    "date": "2026-07-12",
+    "time": "01:00",
     "score": {
       "home": 0,
       "away": 0
@@ -1576,9 +1576,9 @@
     "stage": "SEMI_FINALS",
     "home": "TBD",
     "away": "TBD",
-    "utcDate": "2026-06-29T12:00:00.000Z",
-    "date": "2026-06-29",
-    "time": "12:00",
+    "utcDate": "2026-07-14T19:00:00Z",
+    "date": "2026-07-14",
+    "time": "19:00",
     "score": {
       "home": 0,
       "away": 0
@@ -1591,9 +1591,9 @@
     "stage": "SEMI_FINALS",
     "home": "TBD",
     "away": "TBD",
-    "utcDate": "2026-06-30T12:00:00.000Z",
-    "date": "2026-06-30",
-    "time": "12:00",
+    "utcDate": "2026-07-15T19:00:00Z",
+    "date": "2026-07-15",
+    "time": "19:00",
     "score": {
       "home": 0,
       "away": 0
@@ -1606,9 +1606,9 @@
     "stage": "FINAL",
     "home": "TBD",
     "away": "TBD",
-    "utcDate": "2026-06-29T12:00:00.000Z",
-    "date": "2026-06-29",
-    "time": "12:00",
+    "utcDate": "2026-07-19T19:00:00Z",
+    "date": "2026-07-19",
+    "time": "19:00",
     "score": {
       "home": 0,
       "away": 0
@@ -1621,9 +1621,9 @@
     "stage": "THIRD_PLACE",
     "home": "TBD",
     "away": "TBD",
-    "utcDate": "2026-06-29T12:00:00.000Z",
-    "date": "2026-06-29",
-    "time": "12:00",
+    "utcDate": "2026-07-18T19:00:00Z",
+    "date": "2026-07-18",
+    "time": "19:00",
     "score": {
       "home": 0,
       "away": 0
