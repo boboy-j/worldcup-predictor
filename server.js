@@ -15,6 +15,8 @@ const http = require('http');
 const url = require('url');
 const fs = require('fs');
 const path = require('path');
+let nodeFetch;
+try { nodeFetch = require('node-fetch'); } catch (_) { /* native fetch */ }
 
 // ===================== 配置 =====================
 const PORT = process.env.PORT || 3000;
@@ -117,7 +119,8 @@ async function fetchFootballData(endpoint) {
   try {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 10000);
-    const res = await fetch('https://api.football-data.org/v4' + endpoint, {
+    const fetcher = typeof fetch !== 'undefined' ? fetch : nodeFetch;
+    const res = await fetcher('https://api.football-data.org/v4' + endpoint, {
       headers: { 'X-Auth-Token': FOOTBALL_DATA_KEY },
       signal: controller.signal
     });
@@ -129,7 +132,7 @@ async function fetchFootballData(endpoint) {
     const data = await res.json();
     return data;
   } catch (e) {
-    if (e.name === 'AbortError') console.log('[API] 请求超时');
+    console.log(`[API] 请求失败: ${e.name}: ${e.message}`);
     return null;
   }
 }

@@ -1,11 +1,7 @@
-feat: 完全消除假数据，100% 使用 football-data.org 真实数据
+fix: 使用 node-fetch 兜底 API 请求，添加详细错误日志
 
-- 删除本地模拟数据 matchResults / initMatches / generateLocalScorers
-- 加入 TEAM_NAME_ALIAS 映射，修复 Türkiye/Bosnia/Congo 等国名不匹配
-- 兼容 FOOTBALL_DATA_KEY 和 FOOTBALL_DATA_API_KEY 两个环境变量名
-- 未知球队不再分配假射手，只分配已知球队的进球
-- 淘汰赛括号/积分榜/射手榜全部使用服务器真实数据
-- 页面加载时显示骨架屏等待动画，不再渲染假 KPI
-- 直播比赛卡片脉冲动画 + 移动端响应式优化
+- 引入 node-fetch 包作为原生 fetch 的 fallback
+- 打印真实错误信息（不再只静默吞掉）
+- 解决 Railway 上 API 返回空数据的问题
 
 Co-Authored-By: AtomCode (deepseek-v4-flash) <noreply@atomgit.com>
