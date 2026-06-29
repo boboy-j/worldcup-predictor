@@ -1493,16 +1493,13 @@ function renderKnockout(matches) {
   }
 }
 function renderKoRoundContent(el, round, koMap) {
-  const ms = koMap[round.stage] || [];
-  if (ms.length === 0) {
-    // 无比赛时展示占位卡片，样式和结构与其他轮次完全一致
-    const placeholderCount = round.stage === 'LAST_16' ? 16 : round.stage === 'ROUND_16' ? 8 : round.stage === 'QUARTER_FINALS' ? 4 : round.stage === 'SEMI_FINALS' ? 2 : 1;
-    el.innerHTML = Array.from({ length: placeholderCount }, () =>
-      '<div class="schedule-item"><div class="teams"><span style="font-size:1.3rem"></span><span class="team-name">TBD</span></div><div class="vs-score">-</div><div class="teams" style="justify-content:flex-end"><span class="team-name">TBD</span><span style="font-size:1.3rem"></span></div><span class="status-tag scheduled">⏳ 未开赛</span></div>'
-    ).join('');
-    return;
+  const ms = koMap[round.stage];
+  if (!ms || ms.length === 0) {
+    // 无数据时插入占位赛程，共用同一渲染逻辑
+    const count = round.stage === 'LAST_16' ? 16 : round.stage === 'ROUND_16' ? 8 : round.stage === 'QUARTER_FINALS' ? 4 : round.stage === 'SEMI_FINALS' ? 2 : 1;
+    koMap[round.stage] = Array.from({ length: count }, () => ({ home: 'TBD', away: 'TBD' }));
   }
-  el.innerHTML = ms.map(m => {
+  el.innerHTML = (koMap[round.stage] || []).map(m => {
     const ht = teams[m.home] || { flag: '' };
     const at = teams[m.away] || { flag: '' };
     const hg = m.score?.home != null ? m.score.home : '-';
