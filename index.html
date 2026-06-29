@@ -1498,7 +1498,7 @@ function renderKoRoundContent(el, round, koMap) {
     // 无比赛时展示占位卡片，样式和结构与其他轮次完全一致
     const placeholderCount = round.stage === 'LAST_16' ? 16 : round.stage === 'ROUND_16' ? 8 : round.stage === 'QUARTER_FINALS' ? 4 : round.stage === 'SEMI_FINALS' ? 2 : 1;
     el.innerHTML = Array.from({ length: placeholderCount }, () =>
-      '<div class="schedule-item"><div class="teams"><span style="font-size:1.3rem">🏳️</span><span class="team-name" style="color:var(--text-muted)">待定</span></div><div class="vs-score"><span style="color:var(--text-muted)">- : -</span></div><div class="teams" style="justify-content:flex-end"><span class="team-name" style="color:var(--text-muted)">待定</span><span style="font-size:1.3rem">🏳️</span></div><span class="status-tag scheduled">⏳ 未开赛</span></div>'
+      '<div class="schedule-item"><div class="teams"><span style="font-size:1.3rem"></span><span class="team-name">TBD</span></div><div class="vs-score">-</div><div class="teams" style="justify-content:flex-end"><span class="team-name">TBD</span><span style="font-size:1.3rem"></span></div><span class="status-tag scheduled">⏳ 未开赛</span></div>'
     ).join('');
     return;
   }
